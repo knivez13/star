@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d4bc0c2b80641bb97d9b58f849012b7",
+    "content-hash": "9b5ef918a30beafa5698d67f193d988c",
     "packages": [
         {
             "name": "brick/math",
@@ -505,6 +505,54 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "elgibor-solution/laravel-database-encryption",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elgibor-solution/laravel-database-encryption.git",
+                "reference": "e74082885ecab8dd126c40e9acd844d43bc5a25a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elgibor-solution/laravel-database-encryption/zipball/e74082885ecab8dd126c40e9acd844d43bc5a25a",
+                "reference": "e74082885ecab8dd126c40e9acd844d43bc5a25a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ESolution\\DBEncryption\\Providers\\DBEncryptionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ESolution\\DBEncryption\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "E-Solution",
+                    "email": "info@elgibor-solution.com"
+                }
+            ],
+            "description": "Auto Encrypt and Decrypt Database through Eloquent",
+            "support": {
+                "issues": "https://github.com/elgibor-solution/laravel-database-encryption/issues",
+                "source": "https://github.com/elgibor-solution/laravel-database-encryption/tree/1.1.0"
+            },
+            "time": "2021-08-30T01:21:49+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1049,6 +1097,67 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "kyslik/column-sortable",
+            "version": "6.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kyslik/column-sortable.git",
+                "reference": "0f753dfd34338e87a8964a3fb2cd10fa86174b3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kyslik/column-sortable/zipball/0f753dfd34338e87a8964a3fb2cd10fa86174b3c",
+                "reference": "0f753dfd34338e87a8964a3fb2cd10fa86174b3c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^8.5|^9.5.10|^10.5"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kyslik\\ColumnSortable\\ColumnSortableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kyslik\\ColumnSortable\\": "src/ColumnSortable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Kiesel",
+                    "email": "martin.kiesel@gmail.com",
+                    "role": "Developer and maintainer"
+                }
+            ],
+            "description": "Package for handling column sorting in Laravel 6.x",
+            "keywords": [
+                "column",
+                "laravel",
+                "sort",
+                "sortable",
+                "sorting"
+            ],
+            "support": {
+                "issues": "https://github.com/Kyslik/column-sortable/issues",
+                "source": "https://github.com/Kyslik/column-sortable/tree/6.6.0"
+            },
+            "time": "2024-03-14T08:22:23+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2397,6 +2506,94 @@
             "time": "2024-03-06T16:17:14+00:00"
         },
         {
+            "name": "owen-it/laravel-auditing",
+            "version": "v13.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/owen-it/laravel-auditing.git",
+                "reference": "27e1b3121a6b34f9635d2dbe84c13ca11ed2bee0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/27e1b3121a6b34f9635d2dbe84c13ca11ed2bee0",
+                "reference": "27e1b3121a6b34f9635d2dbe84c13ca11ed2bee0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/filesystem": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "*",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.6|^10.5|^11.0"
+            },
+            "suggest": {
+                "irazasyed/larasupport": "Needed to publish the package configuration in Lumen"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v13-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "OwenIt\\Auditing\\AuditingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenIt\\Auditing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antério Vieira",
+                    "email": "anteriovieira@gmail.com"
+                },
+                {
+                    "name": "Raphael França",
+                    "email": "raphaelfrancabsb@gmail.com"
+                },
+                {
+                    "name": "Morten D. Hansen",
+                    "email": "morten@visia.dk"
+                }
+            ],
+            "description": "Audit changes of your Eloquent models in Laravel/Lumen",
+            "homepage": "https://laravel-auditing.com",
+            "keywords": [
+                "Accountability",
+                "Audit",
+                "auditing",
+                "changes",
+                "eloquent",
+                "history",
+                "laravel",
+                "log",
+                "logging",
+                "lumen",
+                "observer",
+                "record",
+                "revision",
+                "tracking"
+            ],
+            "support": {
+                "issues": "https://github.com/owen-it/laravel-auditing/issues",
+                "source": "https://github.com/owen-it/laravel-auditing"
+            },
+            "time": "2024-03-14T13:42:22+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.2",
             "source": {
@@ -3188,6 +3385,228 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
+            "name": "spatie/db-dumper",
+            "version": "3.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/db-dumper.git",
+                "reference": "faca5056830bccea04eadf07e8074669cb9e905e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/faca5056830bccea04eadf07e8074669cb9e905e",
+                "reference": "faca5056830bccea04eadf07e8074669cb9e905e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symfony/process": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.22"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DbDumper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dump databases",
+            "homepage": "https://github.com/spatie/db-dumper",
+            "keywords": [
+                "database",
+                "db-dumper",
+                "dump",
+                "mysqldump",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/db-dumper/tree/3.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-24T14:54:13+00:00"
+        },
+        {
+            "name": "spatie/laravel-backup",
+            "version": "8.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-backup.git",
+                "reference": "7e74431fc5c46319a27daa44897df1c7bf4afe5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/7e74431fc5c46319a27daa44897df1c7bf4afe5a",
+                "reference": "7e74431fc5c46319a27daa44897df1c7bf4afe5a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "^1.14.0",
+                "illuminate/console": "^10.10.0|^11.0",
+                "illuminate/contracts": "^10.10.0|^11.0",
+                "illuminate/events": "^10.10.0|^11.0",
+                "illuminate/filesystem": "^10.10.0|^11.0",
+                "illuminate/notifications": "^10.10.0|^11.0",
+                "illuminate/support": "^10.10.0|^11.0",
+                "league/flysystem": "^3.0",
+                "php": "^8.1",
+                "spatie/db-dumper": "^3.0",
+                "spatie/laravel-package-tools": "^1.6.2",
+                "spatie/laravel-signal-aware-command": "^1.2|^2.0",
+                "spatie/temporary-directory": "^2.0",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/finder": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "composer-runtime-api": "^2.0",
+                "ext-pcntl": "*",
+                "larastan/larastan": "^2.7.0",
+                "laravel/slack-notification-channel": "^2.5|^3.0",
+                "league/flysystem-aws-s3-v3": "^2.0|^3.0",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^1.20|^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.1"
+            },
+            "suggest": {
+                "laravel/slack-notification-channel": "Required for sending notifications via Slack"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Backup\\BackupServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/functions.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Backup\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package to backup your application",
+            "homepage": "https://github.com/spatie/laravel-backup",
+            "keywords": [
+                "backup",
+                "database",
+                "laravel-backup",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-backup/issues",
+                "source": "https://github.com/spatie/laravel-backup/tree/8.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/spatie",
+                    "type": "github"
+                },
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "other"
+                }
+            ],
+            "time": "2024-05-02T13:09:01+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
+                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-20T07:29:11+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "6.7.0",
             "source": {
@@ -3268,6 +3687,142 @@
                 }
             ],
             "time": "2024-04-19T12:35:28+00:00"
+        },
+        {
+            "name": "spatie/laravel-signal-aware-command",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-signal-aware-command.git",
+                "reference": "49a5e671c3a3fd992187a777d01385fc6a84759d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-signal-aware-command/zipball/49a5e671c3a3fd992187a777d01385fc6a84759d",
+                "reference": "49a5e671c3a3fd992187a777d01385fc6a84759d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.4.3",
+                "symfony/console": "^7.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2|^7.0",
+                "ext-pcntl": "*",
+                "nunomaduro/collision": "^5.3|^6.0|^7.0|^8.0",
+                "orchestra/testbench": "^9.0",
+                "pestphp/pest-plugin-laravel": "^1.3|^2.0",
+                "phpunit/phpunit": "^9.5|^10|^11",
+                "spatie/laravel-ray": "^1.17"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SignalAwareCommand\\SignalAwareCommandServiceProvider"
+                    ],
+                    "aliases": {
+                        "Signal": "Spatie\\SignalAwareCommand\\Facades\\Signal"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SignalAwareCommand\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle signals in artisan commands",
+            "homepage": "https://github.com/spatie/laravel-signal-aware-command",
+            "keywords": [
+                "laravel",
+                "laravel-signal-aware-command",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-signal-aware-command/issues",
+                "source": "https://github.com/spatie/laravel-signal-aware-command/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-05T13:37:25+00:00"
+        },
+        {
+            "name": "spatie/temporary-directory",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/temporary-directory.git",
+                "reference": "76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a",
+                "reference": "76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\TemporaryDirectory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily create, use and destroy temporary directories",
+            "homepage": "https://github.com/spatie/temporary-directory",
+            "keywords": [
+                "php",
+                "spatie",
+                "temporary-directory"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/temporary-directory/issues",
+                "source": "https://github.com/spatie/temporary-directory/tree/2.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-25T11:46:58+00:00"
         },
         {
             "name": "symfony/clock",
@@ -7921,16 +8476,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78"
+                "reference": "e27977d534eefe04c154c6fd8460217024054c05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/9aa60f6ded35a774554e7a5256dca12b72693b78",
-                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/e27977d534eefe04c154c6fd8460217024054c05",
+                "reference": "e27977d534eefe04c154c6fd8460217024054c05",
                 "shasum": ""
             },
             "require": {
@@ -7978,7 +8533,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.5.0"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.5.1"
             },
             "funding": [
                 {
@@ -7986,20 +8541,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-02T13:18:42+00:00"
+            "time": "2024-05-03T15:43:14+00:00"
         },
         {
             "name": "spatie/ignition",
-            "version": "1.14.0",
+            "version": "1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "80385994caed328f6f9c9952926932e65b9b774c"
+                "reference": "c23cc018c5f423d2f413b99f84655fceb6549811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/80385994caed328f6f9c9952926932e65b9b774c",
-                "reference": "80385994caed328f6f9c9952926932e65b9b774c",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/c23cc018c5f423d2f413b99f84655fceb6549811",
+                "reference": "c23cc018c5f423d2f413b99f84655fceb6549811",
                 "shasum": ""
             },
             "require": {
@@ -8069,7 +8624,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-26T08:45:51+00:00"
+            "time": "2024-05-03T15:56:16+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
