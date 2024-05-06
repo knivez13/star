@@ -2,64 +2,83 @@
 
 namespace App\Http\Controllers\Maintenance;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Maintenance\ReportType;
 
 class ReportTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    function __construct()
     {
-        //
+        // $this->middleware('permission:view-maintenance-business-units-list', ['only' => ['index']]);
+        // $this->middleware('permission:view-maintenance-business-units-add', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:view-maintenance-business-units-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:view-maintenance-business-units-delete', ['only' => ['destroy']]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(Request $request)
+    {
+        $requestParams = $request->all();
+        $search = Arr::get($requestParams, 'search', '');
+        $list = ReportType::query();
+        if (!empty($search)) {
+            $list->where('code', 'LIKE', '%' . $search . '%');
+            $list->orWhere('description', 'LIKE', '%' . $search . '%');
+        }
+        $list->sortable('code');
+        $list->with('createdBy', 'updatedBy');
+
+        $datas = $list->paginate(10);
+        return view('maintenance.business-unit.index', compact('datas'));
+    }
+
     public function create()
     {
-        //
+        return view('maintenance.business-unit.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|unique:report_types,code',
+            'description' => 'required',
+        ]);
+
+        $input = Arr::only($request->all(), ['code', 'description']);
+        $input['created_by'] = Auth::user()->id;
+        ReportType::create($input);
+        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $data = ReportType::find($id);
+        return view('maintenance.business-unit.edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'code' => 'required|unique:report_types,code,' . $id,
+            'description' => 'required',
+        ]);
+
+        $input = Arr::only($request->all(), ['code', 'description']);
+        $input['updated_by'] = Auth::user()->id;
+        ReportType::find($id)->update($input);
+        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        ReportType::find($id)->delete();
+        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
     }
 }

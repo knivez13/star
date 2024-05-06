@@ -72,25 +72,10 @@
                                     <span class="font-w400 d-block">Franklin Jr</span>
                                     <small class="text-end font-w400">Superadmin</small>
                                 </div>
-                                <i class="fas fa-chevron-down"></i>
                             </div>
 
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <a href="/" class="dropdown-item ai-icon ">
-
-                            <span class="ms-2">Profile </span>
-                        </a>
-                        <a href="/" class="dropdown-item ai-icon">
-
-                            <span class="ms-2">Inbox </span>
-                        </a>
-                        <a href="/" class="dropdown-item ai-icon">
-
-                            <span class="ms-2">Logout </span>
-                        </a>
-                    </div>
                 </div>
                 <ul class="metismenu" id="menu">
                     <li><a href="/" class="" aria-expanded="false">
