@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Maintenance;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
+use App\Models\BriefingLogs;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Maintenance\UserLevel;
 
-class UserLevelController extends Controller
+class BriefingLogsController extends Controller
 {
     function __construct()
     {
@@ -22,10 +21,9 @@ class UserLevelController extends Controller
     {
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
-        $list = UserLevel::query();
+        $list = BriefingLogs::query();
         if (!empty($search)) {
-            $list->where('code', 'LIKE', '%' . $search . '%');
-            $list->orWhere('description', 'LIKE', '%' . $search . '%');
+            $list->where('description', 'LIKE', '%' . $search . '%');
         }
         $list->sortable('code');
         $list->with('createdBy', 'updatedBy');
@@ -48,7 +46,7 @@ class UserLevelController extends Controller
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
-        UserLevel::create($input);
+        BriefingLogs::create($input);
         return redirect(route('business-unit.index'))->with('success', 'Created successfully');
     }
 
@@ -59,7 +57,7 @@ class UserLevelController extends Controller
 
     public function edit($id)
     {
-        $data = UserLevel::find($id);
+        $data = BriefingLogs::find($id);
         return view('maintenance.business-unit.edit', compact('data'));
     }
 
@@ -72,13 +70,13 @@ class UserLevelController extends Controller
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
-        UserLevel::find($id)->update($input);
+        BriefingLogs::find($id)->update($input);
         return redirect(route('business-unit.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
-        UserLevel::find($id)->delete();
+        BriefingLogs::find($id)->delete();
         return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
     }
 }

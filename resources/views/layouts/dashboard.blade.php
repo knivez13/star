@@ -7,10 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Star</title>
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
-    <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link class="main-css" href="{{ asset('css/style.css') }}" rel="stylesheet">
-    @vite([ 'resources/js/app.js'])
+    <link rel="shortcut icon" type="image/png" href="{{ asset('./assets/images/favicon.png') }}">
+    <link href="{{ asset('./assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link class="main-css" href="{{ asset('./assets/css/style.css') }}" rel="stylesheet">
+    <!-- @vite([ 'resources/js/app.js']) -->
 </head>
 
 <body>
@@ -24,8 +24,8 @@
     <div id="main-wrapper">
         <div class="nav-header">
             <a href="/" class="brand-logo">
-                <img src="/logo2.png" class="logo-abbr">
-                <img src="/logo.png" class="brand-title">
+                <img src="{{ asset('./logo2.png') }}" class="logo-abbr">
+                <img src="{{ asset('./logo.png') }}" class="brand-title">
             </a>
         </div>
         <div class="header">
@@ -66,7 +66,7 @@
                 <div class="dropdown header-profile2 ">
                     <a class="nav-link " href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                         <div class="header-info2 d-flex align-items-center">
-                            <img src="images/profile/pic1.jpg" alt="">
+                            <img src="{{ asset('./assets/images/profile/pic1.jpg') }}" alt="">
                             <div class="d-flex align-items-center sidebar-info">
                                 <div>
                                     <span class="font-w400 d-block">Franklin Jr</span>
@@ -108,13 +108,18 @@
                             <span class="nav-text">Maintenance</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/">Dashboard Light</a></li>
-                            <li><a href="index-2.html">Dashboard Dark</a></li>
-                            <li><a href="jobs-page.html">Jobs</a></li>
-                            <li><a href="application-page.html">Application</a></li>
-                            <li><a href="my-profile.html">Profile</a></li>
-                            <li><a href="statistics-page.html">Statistics</a></li>
-                            <li><a href="compaines.html">Companies</a></li>
+                            <li><a href="{{ route('area.index') }}">Area</a></li>
+                            <li><a href="{{ route('currency.index') }}">currency</a></li>
+                            <li><a href="{{ route('department.index') }}">department</a></li>
+                            <li><a href="{{ route('group-section.index') }}">group-section</a></li>
+                            <li><a href="{{ route('incident-title.index') }}">incident-title</a></li>
+                            <li><a href="{{ route('inspector.index') }}">inspector</a></li>
+                            <li><a href="{{ route('location.index') }}">location</a></li>
+                            <li><a href="{{ route('origination.index') }}">origination</a></li>
+                            <li><a href="{{ route('property.index') }}">property</a></li>
+                            <!-- <li><a href="{{ route('report-status.index') }}">report-status</a></li> -->
+                            <li><a href="{{ route('report-type.index') }}">report-type</a></li>
+                            <li><a href="{{ route('result.index') }}">result</a></li>
                         </ul>
 
                     </li>
@@ -123,13 +128,10 @@
                             <span class="nav-text">User Management</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/">Dashboard Light</a></li>
-                            <li><a href="index-2.html">Dashboard Dark</a></li>
-                            <li><a href="jobs-page.html">Jobs</a></li>
-                            <li><a href="application-page.html">Application</a></li>
-                            <li><a href="my-profile.html">Profile</a></li>
-                            <li><a href="statistics-page.html">Statistics</a></li>
-                            <li><a href="compaines.html">Companies</a></li>
+                            <li><a href="{{ route('user-designation.index') }}">Designation</a></li>
+                            <li><a href="{{ route('user-level.index') }}">Level</a></li>
+                            <li><a href="{{ route('user-level.index') }}">Role</a></li>
+                            <li><a href="{{ route('user-level.index') }}">Users</a></li>
                         </ul>
 
                     </li>
@@ -146,17 +148,17 @@
             </div>
         </div>
 
-        <div class="footer fixed-bottom" style="height: 30px;">
+        <div class="footer ">
             <div class="text-center">
                 <p>Surveillance Technical and Analytics Report</p>
             </div>
         </div>
     </div>
 
-    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('js/custom.min.js') }}"></script>
-    <script src="{{ asset('js/dlabnav-init.js') }}"></script>
+    <script src="{{ asset('./assets/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('./assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('./assets/js/custom.min.js') }}"></script>
+    <!-- <script src="{{ asset('./assets/js/dlabnav-init.js') }}"></script> -->
 </body>
 
 </html>

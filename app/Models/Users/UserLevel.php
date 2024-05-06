@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Maintenance;
+namespace App\Models\Users;
 
 use App\Models\User;
 use App\Traits\Uuids;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class UserDesignation extends Model
+class UserLevel extends Model
 {
     use HasFactory, Uuids, SoftDeletes, Sortable;
     protected $guarded = [];

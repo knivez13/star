@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Maintenance;
+namespace App\Models\Blacklist;
 
 use App\Models\User;
 use App\Traits\Uuids;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class UserLevel extends Model
+class BlackistStatus extends Model
 {
     use HasFactory, Uuids, SoftDeletes, Sortable;
     protected $guarded = [];

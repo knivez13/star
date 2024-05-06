@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Maintenance;
+namespace App\Http\Controllers\Users;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Maintenance\UserDesignation;
+use App\Models\Users\UserLevel;
 
-class UserDestinationController extends Controller
+class UserLevelController extends Controller
 {
     function __construct()
     {
@@ -22,7 +22,7 @@ class UserDestinationController extends Controller
     {
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
-        $list = UserDesignation::query();
+        $list = UserLevel::query();
         if (!empty($search)) {
             $list->where('code', 'LIKE', '%' . $search . '%');
             $list->orWhere('description', 'LIKE', '%' . $search . '%');
@@ -42,13 +42,13 @@ class UserDestinationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required|unique:user_designations,code',
+            'code' => 'required|unique:user_levels,code',
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
-        UserDesignation::create($input);
+        UserLevel::create($input);
         return redirect(route('business-unit.index'))->with('success', 'Created successfully');
     }
 
@@ -59,26 +59,26 @@ class UserDestinationController extends Controller
 
     public function edit($id)
     {
-        $data = UserDesignation::find($id);
+        $data = UserLevel::find($id);
         return view('maintenance.business-unit.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'code' => 'required|unique:user_designations,code,' . $id,
+            'code' => 'required|unique:user_levels,code,' . $id,
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
-        UserDesignation::find($id)->update($input);
+        UserLevel::find($id)->update($input);
         return redirect(route('business-unit.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
-        UserDesignation::find($id)->delete();
+        UserLevel::find($id)->delete();
         return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
     }
 }

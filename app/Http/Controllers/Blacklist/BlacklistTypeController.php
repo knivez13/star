@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Maintenance;
+namespace App\Http\Controllers\Blacklist;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use App\Models\Maintenance\Area;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Blacklist\BlackistType;
 
-class AreaController extends Controller
+class BlacklistTypeController extends Controller
 {
     function __construct()
     {
@@ -22,7 +22,7 @@ class AreaController extends Controller
     {
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
-        $list = Area::query();
+        $list = BlackistType::query();
         if (!empty($search)) {
             $list->where('code', 'LIKE', '%' . $search . '%');
             $list->orWhere('description', 'LIKE', '%' . $search . '%');
@@ -48,7 +48,7 @@ class AreaController extends Controller
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
-        Area::create($input);
+        BlackistType::create($input);
         return redirect(route('area.index'))->with('success', 'Created successfully');
     }
 
@@ -59,7 +59,7 @@ class AreaController extends Controller
 
     public function edit($id)
     {
-        $data = Area::find($id);
+        $data = BlackistType::find($id);
         return view('dashboard.maintenance.area.edit', compact('data'));
     }
 
@@ -72,13 +72,13 @@ class AreaController extends Controller
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
-        Area::find($id)->update($input);
+        BlackistType::find($id)->update($input);
         return redirect(route('area.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
-        Area::find($id)->delete();
+        BlackistType::find($id)->delete();
         return redirect(route('area.index'))->with('success', 'Delete successfully');
     }
 }

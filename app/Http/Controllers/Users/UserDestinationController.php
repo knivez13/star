@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Maintenance;
+namespace App\Http\Controllers\Users;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use App\Models\Maintenance\Area;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Users\UserDesignation;
 
-class AreaController extends Controller
+class UserDestinationController extends Controller
 {
     function __construct()
     {
@@ -22,7 +22,7 @@ class AreaController extends Controller
     {
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
-        $list = Area::query();
+        $list = UserDesignation::query();
         if (!empty($search)) {
             $list->where('code', 'LIKE', '%' . $search . '%');
             $list->orWhere('description', 'LIKE', '%' . $search . '%');
@@ -31,25 +31,25 @@ class AreaController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('dashboard.maintenance.area.index', compact('datas'));
+        return view('maintenance.business-unit.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('dashboard.maintenance.area.create');
+        return view('maintenance.business-unit.create');
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,code',
+            'code' => 'required|unique:user_designations,code',
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
-        Area::create($input);
-        return redirect(route('area.index'))->with('success', 'Created successfully');
+        UserDesignation::create($input);
+        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -59,26 +59,26 @@ class AreaController extends Controller
 
     public function edit($id)
     {
-        $data = Area::find($id);
-        return view('dashboard.maintenance.area.edit', compact('data'));
+        $data = UserDesignation::find($id);
+        return view('maintenance.business-unit.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,code,' . $id,
+            'code' => 'required|unique:user_designations,code,' . $id,
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
-        Area::find($id)->update($input);
-        return redirect(route('area.index'))->with('success', 'Update successfully');
+        UserDesignation::find($id)->update($input);
+        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
-        Area::find($id)->delete();
-        return redirect(route('area.index'))->with('success', 'Delete successfully');
+        UserDesignation::find($id)->delete();
+        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
     }
 }
