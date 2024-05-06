@@ -2,17 +2,12 @@
 <html lang="en">
 
 <head>
-    <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- PAGE TITLE HERE -->
     <title>Star</title>
 
-    <!-- Favicon icon -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link class="main-css" href="css/style.css" rel="stylesheet">
@@ -21,9 +16,6 @@
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
     <div id="preloader">
         <div class="lds-ripple">
             <div></div>
@@ -71,13 +63,6 @@
             </div>
         </div>
 
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <div class="dropdown header-profile2 ">
@@ -170,51 +155,24 @@
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
 
             </div>
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
 
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
         <div class="footer">
             <div class="copyright">
                 <p>Surveillance Technical and Analytics Report</p>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
 
 
 
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-    <!-- Modal -->
+
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -332,15 +290,10 @@
     </div>
 
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
     <script src="vendor/global/global.min.js"></script>
     <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/dlabnav-init.js"></script>
-    <!-- <script src="js/demo.js"></script> -->
 </body>
 
 </html>
