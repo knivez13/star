@@ -1,164 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Star</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('./assets/images/favicon.png') }}">
-    <link href="{{ asset('./assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link class="main-css" href="{{ asset('./assets/css/style.css') }}" rel="stylesheet">
-    <!-- @vite([ 'resources/js/app.js']) -->
+    <meta name="description" content="">
+    <meta name="author" content="Bonjour De Guzman - Senior Full Stack Developer">
+    <link rel="icon" href="{{ asset('./logo2.png') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+
+    <title>Central One - HRIS</title>
+    <link rel="stylesheet" href="{{ asset('./css/vendors_css.css') }}">
+    <link rel="stylesheet" href="{{ asset('./css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('./css/skin_color.css') }}">
+    @vite(['resources/js/app.js'])
+    @yield('style')
+
 </head>
 
-<body>
+<body class="hold-transition light-skin sidebar-mini theme-primary fixed">
 
-    <div id="preloader">
-        <div class="lds-ripple">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <div id="main-wrapper">
-        <div class="nav-header">
-            <a href="/" class="brand-logo">
-                <img src="{{ asset('./logo2.png') }}" class="logo-abbr">
-                <img src="{{ asset('./logo.png') }}" class="brand-title">
-            </a>
-        </div>
-        <div class="header">
-            <div class="header-content">
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="line"></span><span class="line"></span><span class="line"></span>
+    <div class="wrapper">
+        <div id="loader"></div>
+
+        <header class="main-header">
+            <div class="d-flex align-items-center logo-box justify-content-start">
+                <a href="#" class="waves-effect waves-light nav-link d-none d-md-inline-block mx-10 push-btn bg-transparent" data-toggle="push-menu" role="button">
+                    <i data-feather="menu"></i>
+                </a>
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <div class="logo-lg">
+                        <span class="light-logo"><img src="{{ asset('./logo3.png') }}"></span>
                     </div>
+                </a>
+            </div>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <div class="app-menu">
+                    <ul class="header-megamenu nav">
+                        <li class="btn-group nav-item d-md-none">
+                            <a href="#" class="waves-effect waves-light nav-link push-btn" data-toggle="push-menu" role="button">
+                                <i data-feather="menu"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <div class="dashboard_bar">
-                                STAR
-                            </div>
+
+                <div class="navbar-custom-menu r-side">
+                    <ul class="nav navbar-nav">
+                        <li class="btn-group nav-item d-lg-flex d-none align-items-center">
+                            <p class="mb-0 text-fade pe-10 pt-5">{{date("l, jS F Y")}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar position-relative">
+                <div class="user-profile px-20 py-10">
+                    <div class="d-flex align-items-center">
+                        <div class="image">
+                            <img src="{{ asset('./logo2.png') }}" class="avatar avatar-lg bg-primary-light rounded100" alt="User Image">
                         </div>
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link bell dlab-theme-mode" href="javascript:void(0);">
-                                    <i id="icon-light" class="fas fa-sun"></i>
-                                    <i id="icon-dark" class="fas fa-moon"></i>
+                        <div class="info">
+                            <a class="px-20" href="#">{{ Auth::user()->emp_id }}</a>
+                        </div>
+                    </div>
+                    <ul class="list-inline profile-setting mt-20 mb-0 d-flex justify-content-between">
+                        <li><a href="#" data-bs-toggle="tooltip" title="settings"><i data-feather="settings"></i></a></li>
+                        <li><a href="#" data-bs-toggle="tooltip" title="Notification"><i data-feather="bell"></i></a></li>
+
+                        <li><a href="#" data-bs-toggle="tooltip" title="Profile"><i data-feather="user"></i></a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" data-bs-toggle="tooltip" title="Logout"><i data-feather="log-out"></i></a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </ul>
+                </div>
+                <div class="multinav">
+                    <div class="multinav-scroll" style="height: 100%;">
+                        <!-- sidebar menu-->
+                        <ul class="sidebar-menu" data-widget="tree">
+                            <li>
+                                <a href="{{ route('home') }}">
+                                    <i class="si si-grid"></i>
+                                    <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link bell-link " href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">
-                                    <i class="fas fa-plus"></i>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="si si-paper-clip"></i>
+                                    <span>Upload Excel</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
                                 </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Employee</a></li>
+                                    <li><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Schedule</a></li>
+                                </ul>
                             </li>
 
                         </ul>
+
                     </div>
-                </nav>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper ">
+            <div class="container-full fs-13">
+                @yield('content')
             </div>
         </div>
 
-        <div class="dlabnav">
-            <div class="dlabnav-scroll">
-                <div class="dropdown header-profile2 ">
-                    <a class="nav-link " href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                        <div class="header-info2 d-flex align-items-center">
-                            <img src="{{ asset('./assets/images/profile/pic1.jpg') }}" alt="">
-                            <div class="d-flex align-items-center sidebar-info">
-                                <div>
-                                    <span class="font-w400 d-block">Franklin Jr</span>
-                                    <small class="text-end font-w400">Superadmin</small>
-                                </div>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <ul class="metismenu" id="menu">
-                    <li><a href="/" class="" aria-expanded="false">
-                            <i class="fa fa-dashboard"></i>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
+        <footer class="main-footer">
+            <div class="pull-right d-none d-sm-inline-block">
+                <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">STAR</a>
                     </li>
-                    <li><a href="/" class="" aria-expanded="false">
-                            <i class="fa fa-file-alt"></i>
-                            <span class="nav-text">Traker</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">V1</a>
                     </li>
-                    <li><a href="/" class="" aria-expanded="false">
-                            <i class="fa fa-user"></i>
-                            <span class="nav-text">Blacklist</span>
-                        </a>
-                    </li>
-                    <li><a href="/" class="" aria-expanded="false">
-                            <i class="fa fa-calendar-alt"></i>
-                            <span class="nav-text">Daily Logs</span>
-                        </a>
-                    </li>
-                    <li><a href="/" class="" aria-expanded="false">
-                            <i class="fa fa-exclamation-triangle"></i>
-                            <span class="nav-text">Brifing Logs</span>
-                        </a>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-gear"></i>
-                            <span class="nav-text">Maintenance</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('area.index') }}">Area</a></li>
-                            <li><a href="{{ route('currency.index') }}">currency</a></li>
-                            <li><a href="{{ route('department.index') }}">department</a></li>
-                            <li><a href="{{ route('group-section.index') }}">group-section</a></li>
-                            <li><a href="{{ route('incident-title.index') }}">incident-title</a></li>
-                            <li><a href="{{ route('inspector.index') }}">inspector</a></li>
-                            <li><a href="{{ route('location.index') }}">location</a></li>
-                            <li><a href="{{ route('origination.index') }}">origination</a></li>
-                            <li><a href="{{ route('property.index') }}">property</a></li>
-                            <!-- <li><a href="{{ route('report-status.index') }}">report-status</a></li> -->
-                            <li><a href="{{ route('report-type.index') }}">report-type</a></li>
-                            <li><a href="{{ route('result.index') }}">result</a></li>
-                        </ul>
-
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-user-tie"></i>
-                            <span class="nav-text">User Management</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('user-designation.index') }}">Designation</a></li>
-                            <li><a href="{{ route('user-level.index') }}">Level</a></li>
-                            <li><a href="{{ route('user-level.index') }}">Role</a></li>
-                            <li><a href="{{ route('user-level.index') }}">Users</a></li>
-                        </ul>
-
-                    </li>
-
-
                 </ul>
             </div>
-        </div>
-
-        <div class="content-body">
-            <div class="container-fluid">
-                @yield('content')
-
-            </div>
-        </div>
-
-        <div class="footer ">
-            <div class="text-center">
-                <p>Surveillance Technical and Analytics Report</p>
-            </div>
-        </div>
+            &copy; {{date("Y")}} <a href="#">D' Heights</a>. All Rights Reserved.
+        </footer>
+        <div class="control-sidebar-bg"></div>
     </div>
-
-    <script src="{{ asset('./assets/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('./assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('./assets/js/custom.min.js') }}"></script>
-    <!-- <script src="{{ asset('./assets/js/dlabnav-init.js') }}"></script> -->
+    <script src="{{ asset('./js/vendors.min.js') }}"></script>
+    <script src="{{ asset('./js/pages/chat-popup.js') }}"></script>
+    <script src="{{ asset('./assets/icons/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('./js/template.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>
