@@ -31,12 +31,12 @@ class OriginationController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.maintenance.origination.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.maintenance.origination.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class OriginationController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         Origination::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('origination.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class OriginationController extends Controller
     public function edit($id)
     {
         $data = Origination::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.maintenance.origination.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class OriginationController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         Origination::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('origination.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         Origination::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('origination.index'))->with('success', 'Delete successfully');
     }
 }

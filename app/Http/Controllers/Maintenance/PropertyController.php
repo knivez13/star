@@ -31,12 +31,12 @@ class PropertyController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.maintenance.property.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.maintenance.property.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class PropertyController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         Property::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('property.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class PropertyController extends Controller
     public function edit($id)
     {
         $data = Property::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.maintenance.property.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class PropertyController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         Property::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('property.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         Property::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('property.index'))->with('success', 'Delete successfully');
     }
 }

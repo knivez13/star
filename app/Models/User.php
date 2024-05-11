@@ -41,10 +41,10 @@ class User extends Authenticatable
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class, 'created_by')->select('id', 'name');
+        return $this->belongsTo(User::class, 'created_by')->select('id', 'first_name', 'middle_name', 'last_name');
     }
     public function updatedBy()
     {
-        return $this->belongsTo(User::class, 'updated_by')->select('id', 'name');
+        return $this->belongsTo(User::class, 'updated_by')->select('id', 'first_name', 'middle_name', 'last_name');
     }
 }

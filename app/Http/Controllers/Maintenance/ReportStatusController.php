@@ -31,12 +31,12 @@ class ReportStatusController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.maintenance.report-status.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.maintenance.report-status.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class ReportStatusController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         ReportStatus::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('report-status.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class ReportStatusController extends Controller
     public function edit($id)
     {
         $data = ReportStatus::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.maintenance.report-status.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class ReportStatusController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         ReportStatus::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('report-status.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         ReportStatus::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('report-status.index'))->with('success', 'Delete successfully');
     }
 }

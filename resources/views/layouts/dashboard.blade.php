@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 
-    <title>Central One - HRIS</title>
+    <title>Star | D'Heights</title>
     <link rel="stylesheet" href="{{ asset('./css/vendors_css.css') }}">
     <link rel="stylesheet" href="{{ asset('./css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('./css/skin_color.css') }}">
@@ -86,16 +86,65 @@
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
                             <li>
-                                <a href="{{ route('home') }}">
+                                <a href="{{ route('dashboard') }}">
                                     <i class="si si-grid"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="#">
+                                    <i class="si si-info"></i>
+                                    <span>Tracker</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="si si-calendar"></i>
+                                    <span>Daily Logs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="si si-feed"></i>
+                                    <span>Briefing Logs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="si si-ban"></i>
+                                    <span>Blacklist</span>
+                                </a>
+                            </li>
+
 
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="si si-paper-clip"></i>
-                                    <span>Upload Excel</span>
+                                    <i class="si si-settings"></i>
+                                    <span>Maintenance</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('property.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Property</a></li>
+                                    <li><a href="{{ route('group-section.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Group Section</a></li>
+                                    <li><a href="{{ route('area.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Area</a></li>
+                                    <li><a href="{{ route('location.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Location</a></li>
+                                    <li><a href="{{ route('department.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Department</a></li>
+                                    <li><a href="{{ route('report-type.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Type</a></li>
+                                    <li><a href="{{ route('incident-title.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Incident Title</a></li>
+                                    <li><a href="{{ route('currency.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Currency</a></li>
+                                    <li><a href="{{ route('inspector.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Inspector</a></li>
+                                    <li><a href="{{ route('origination.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Origination</a></li>
+                                    <li><a href="{{ route('result.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Result</a></li>
+                                    <li><a href="{{ route('report-status.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Status</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="si si-people"></i>
+                                    <span>User Management</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>

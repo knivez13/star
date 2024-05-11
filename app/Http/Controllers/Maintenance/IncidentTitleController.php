@@ -31,12 +31,12 @@ class IncidentTitleController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.maintenance.incident-title.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.maintenance.incident-title.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class IncidentTitleController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         IncidentTitle::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('incident-title.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,25 +60,25 @@ class IncidentTitleController extends Controller
     public function edit($id)
     {
         $data = IncidentTitle::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.maintenance.incident-title.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,incident_titles,' . $id,
+            'code' => 'required|unique:incident_titles,code,' . $id,
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         IncidentTitle::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('incident-title.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         IncidentTitle::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('incident-title.index'))->with('success', 'Delete successfully');
     }
 }
