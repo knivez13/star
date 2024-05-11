@@ -31,25 +31,25 @@ class BlacklistStatusController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('dashboard.maintenance.area.index', compact('datas'));
+        return view('dashboard.blacklist-maintenance.blacklist-status.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('dashboard.maintenance.area.create');
+        return view('dashboard.blacklist-maintenance.blacklist-status.create');
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,code',
+            'code' => 'required|unique:blackist_statuses,code',
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         BlackistStatus::create($input);
-        return redirect(route('area.index'))->with('success', 'Created successfully');
+        return redirect(route('blacklist-status.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,25 +60,25 @@ class BlacklistStatusController extends Controller
     public function edit($id)
     {
         $data = BlackistStatus::find($id);
-        return view('dashboard.maintenance.area.edit', compact('data'));
+        return view('dashboard.blacklist-maintenance.blacklist-status.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,code,' . $id,
+            'code' => 'required|unique:blackist_statuses,code,' . $id,
             'description' => 'required',
         ]);
 
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         BlackistStatus::find($id)->update($input);
-        return redirect(route('area.index'))->with('success', 'Update successfully');
+        return redirect(route('blacklist-status.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         BlackistStatus::find($id)->delete();
-        return redirect(route('area.index'))->with('success', 'Delete successfully');
+        return redirect(route('blacklist-status.index'))->with('success', 'Delete successfully');
     }
 }

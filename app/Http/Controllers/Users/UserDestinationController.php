@@ -31,12 +31,12 @@ class UserDestinationController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.user-maintenance.user-desination.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.user-maintenance.user-desination.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class UserDestinationController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         UserDesignation::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('user-designation.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class UserDestinationController extends Controller
     public function edit($id)
     {
         $data = UserDesignation::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.user-maintenance.user-desination.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class UserDestinationController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         UserDesignation::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('user-designation.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         UserDesignation::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('user-designation.index'))->with('success', 'Delete successfully');
     }
 }

@@ -85,7 +85,7 @@
                     <div class="multinav-scroll" style="height: 100%;">
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
-                            <li>
+                            <li class="{{(strpos(Route::currentRouteName(), 'dashboard') === 0) ? 'active' : ''}}">
                                 <a href="{{ route('dashboard') }}">
                                     <i class="si si-grid"></i>
                                     <span>Dashboard</span>
@@ -97,21 +97,21 @@
                                     <span>Tracker</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{(strpos(Route::currentRouteName(), 'daily-logs.index') === 0) ? 'active' : ''}}">
+                                <a href="{{ route('daily-logs.index') }}">
                                     <i class="si si-calendar"></i>
                                     <span>Daily Logs</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="si si-feed"></i>
+                            <li class="{{(strpos(Route::currentRouteName(), 'briefing-logs.index') === 0) ? 'active' : ''}}">
+                                <a href="{{ route('briefing-logs.index') }}">
+                                    <i class="si si-feed "></i>
                                     <span>Briefing Logs</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="si si-ban"></i>
+                                    <i class="si si-user-unfollow"></i>
                                     <span>Blacklist</span>
                                 </a>
                             </li>
@@ -126,32 +126,47 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('property.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Property</a></li>
-                                    <li><a href="{{ route('group-section.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Group Section</a></li>
-                                    <li><a href="{{ route('area.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Area</a></li>
-                                    <li><a href="{{ route('location.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Location</a></li>
-                                    <li><a href="{{ route('department.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Department</a></li>
-                                    <li><a href="{{ route('report-type.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Type</a></li>
-                                    <li><a href="{{ route('incident-title.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Incident Title</a></li>
-                                    <li><a href="{{ route('currency.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Currency</a></li>
-                                    <li><a href="{{ route('inspector.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Inspector</a></li>
-                                    <li><a href="{{ route('origination.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Origination</a></li>
-                                    <li><a href="{{ route('result.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Result</a></li>
-                                    <li><a href="{{ route('report-status.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Status</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'property.index') === 0) ? 'active' : ''}}"><a href="{{ route('property.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Property</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'group-section.index') === 0) ? 'active' : ''}}"><a href="{{ route('group-section.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Group Section</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'area.index') === 0) ? 'active' : ''}}"><a href="{{ route('area.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Area</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'location.index') === 0) ? 'active' : ''}}"><a href="{{ route('location.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Location</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'department.index') === 0) ? 'active' : ''}}"><a href="{{ route('department.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Department</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'report-type.index') === 0) ? 'active' : ''}}"><a href="{{ route('report-type.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Type</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'incident-title.index') === 0) ? 'active' : ''}}"><a href="{{ route('incident-title.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Incident Title</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'currency.index') === 0) ? 'active' : ''}}"><a href="{{ route('currency.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Currency</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'inspector.index') === 0) ? 'active' : ''}}"><a href="{{ route('inspector.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Inspector</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'origination.index') === 0) ? 'active' : ''}}"><a href="{{ route('origination.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Origination</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'result.index') === 0) ? 'active' : ''}}"><a href="{{ route('result.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Result</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'report-status.index') === 0) ? 'active' : ''}}"><a href="{{ route('report-status.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Status</a></li>
                                 </ul>
                             </li>
 
                             <li class="treeview">
                                 <a href="#">
                                     <i class="si si-people"></i>
-                                    <span>User Management</span>
+                                    <span>User Setting</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Employee</a></li>
-                                    <li><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Schedule</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>User List</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Roles</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="{{ route('user-designation.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Designation</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'user-level.index') === 0) ? 'active' : ''}}"><a href="{{ route('user-level.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Level</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="si si-ban"></i>
+                                    <span>Blacklist Setting</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{(strpos(Route::currentRouteName(), 'blacklist-type.index') === 0) ? 'active' : ''}}"><a href="{{ route('blacklist-type.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Type</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'blacklist-status.index') === 0) ? 'active' : ''}}"><a href="{{ route('blacklist-status.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Status</a></li>
                                 </ul>
                             </li>
 

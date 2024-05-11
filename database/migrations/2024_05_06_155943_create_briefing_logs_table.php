@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('briefing_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('inv_no');
             $table->uuid('origination_id')->nullable();
             $table->foreign('origination_id')->references('id')->on('originations');
             $table->uuid('group_section_id')->nullable();

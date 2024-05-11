@@ -31,12 +31,12 @@ class BlacklistTypeController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('dashboard.maintenance.area.index', compact('datas'));
+        return view('dashboard.blacklist-maintenance.blacklist-type.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('dashboard.maintenance.area.create');
+        return view('dashboard.blacklist-maintenance.blacklist-type.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class BlacklistTypeController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         BlackistType::create($input);
-        return redirect(route('area.index'))->with('success', 'Created successfully');
+        return redirect(route('blacklist-type.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class BlacklistTypeController extends Controller
     public function edit($id)
     {
         $data = BlackistType::find($id);
-        return view('dashboard.maintenance.area.edit', compact('data'));
+        return view('dashboard.blacklist-maintenance.blacklist-type.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class BlacklistTypeController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         BlackistType::find($id)->update($input);
-        return redirect(route('area.index'))->with('success', 'Update successfully');
+        return redirect(route('blacklist-type.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         BlackistType::find($id)->delete();
-        return redirect(route('area.index'))->with('success', 'Delete successfully');
+        return redirect(route('blacklist-type.index'))->with('success', 'Delete successfully');
     }
 }

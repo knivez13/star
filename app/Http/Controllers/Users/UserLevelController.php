@@ -31,12 +31,12 @@ class UserLevelController extends Controller
         $list->with('createdBy', 'updatedBy');
 
         $datas = $list->paginate(10);
-        return view('maintenance.business-unit.index', compact('datas'));
+        return view('dashboard.user-maintenance.user-level.index', compact('datas'));
     }
 
     public function create()
     {
-        return view('maintenance.business-unit.create');
+        return view('dashboard.user-maintenance.user-level.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class UserLevelController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['created_by'] = Auth::user()->id;
         UserLevel::create($input);
-        return redirect(route('business-unit.index'))->with('success', 'Created successfully');
+        return redirect(route('user-level.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class UserLevelController extends Controller
     public function edit($id)
     {
         $data = UserLevel::find($id);
-        return view('maintenance.business-unit.edit', compact('data'));
+        return view('dashboard.user-maintenance.user-level.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -73,12 +73,12 @@ class UserLevelController extends Controller
         $input = Arr::only($request->all(), ['code', 'description']);
         $input['updated_by'] = Auth::user()->id;
         UserLevel::find($id)->update($input);
-        return redirect(route('business-unit.index'))->with('success', 'Update successfully');
+        return redirect(route('user-level.index'))->with('success', 'Update successfully');
     }
 
     public function destroy($id)
     {
         UserLevel::find($id)->delete();
-        return redirect(route('business-unit.index'))->with('success', 'Delete successfully');
+        return redirect(route('user-level.index'))->with('success', 'Delete successfully');
     }
 }
