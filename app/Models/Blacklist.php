@@ -2,12 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Uuids;
+use Kyslik\ColumnSortable\Sortable;
+use App\Models\Blacklist\BlackistType;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Blacklist\BlackistStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Blacklist extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuids, SoftDeletes, Sortable;
+    protected $guarded = [];
+
+    public function blackistType()
+    {
+        return $this->belongsTo(BlackistType::class, 'blackist_type_id');
+    }
+    public function blackistStatus()
+    {
+        return $this->belongsTo(BlackistStatus::class, 'blackist_status_id');
+    }
 
     public function createdBy()
     {

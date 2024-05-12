@@ -49,6 +49,20 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Color<i style="color:red;">*</i></label>
+                            <select class="form-control select2" style="width: 100%;" name="color" value="{{ old('color') }}">
+                                <option value="">Select Color</option>
+                                @foreach ($color as $a)
+                                <option value="{{$a}}" {{$a == old('color')? 'selected':''}} class="text-{{$a}}">{{$a}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('origination_id'))
+                            <div class="text-danger">{{ $errors->first('origination_id') }}</div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer text-end">
                     <button type="submit" class="btn btn-primary btn-sm">
@@ -63,4 +77,9 @@
     </form>
 
 </section>
+@endsection
+
+@section('script')
+<script src="{{ asset('./assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
+<script src="{{ asset('./js/pages/advanced-form-element.js') }}"></script>
 @endsection

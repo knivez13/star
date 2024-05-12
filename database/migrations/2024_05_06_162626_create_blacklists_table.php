@@ -21,8 +21,11 @@ return new class extends Migration
             $table->foreign('blackist_status_id')->references('id')->on('blackist_statuses');
             $table->uuid('blackist_type_id')->nullable();
             $table->foreign('blackist_type_id')->references('id')->on('blackist_types');
+            $table->date('date_hired')->nullable();
 
             $table->string('image_path')->nullable();
+            $table->string('image_path2')->nullable();
+            $table->string('image_path3')->nullable();
 
             $table->timestamps();
             $table->uuid('created_by')->nullable();

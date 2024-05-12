@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('briefing-logs', App\Http\Controllers\BriefingLogsController::class);
     Route::resource('daily-logs', App\Http\Controllers\DailyLogsController::class);
     Route::resource('incident-report', App\Http\Controllers\IncidentReportController::class);
+    Route::resource('blacklist', App\Http\Controllers\BlacklistController::class);
 
     Route::group(['prefix' => 'system-maintenance'], function () {
         Route::resource('area', App\Http\Controllers\Maintenance\AreaController::class);
@@ -42,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('user-level', App\Http\Controllers\Users\UserLevelController::class);
     });
 
-    Route::group(['prefix' => 'blacklist'], function () {
+    Route::group(['prefix' => 'blacklist-maintenance'], function () {
         Route::resource('blacklist-status', App\Http\Controllers\Blacklist\BlacklistStatusController::class);
         Route::resource('blacklist-type', App\Http\Controllers\Blacklist\BlacklistTypeController::class);
     });

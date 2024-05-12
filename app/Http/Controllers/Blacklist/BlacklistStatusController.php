@@ -36,7 +36,9 @@ class BlacklistStatusController extends Controller
 
     public function create()
     {
-        return view('dashboard.blacklist-maintenance.blacklist-status.create');
+        $color = ['secondary', 'dark', 'primary', 'info', 'success', 'warning', 'danger'];
+
+        return view('dashboard.blacklist-maintenance.blacklist-status.create', compact('color'));
     }
 
     public function store(Request $request)
@@ -44,9 +46,10 @@ class BlacklistStatusController extends Controller
         $this->validate($request, [
             'code' => 'required|unique:blackist_statuses,code',
             'description' => 'required',
+            'color' => 'required',
         ]);
 
-        $input = Arr::only($request->all(), ['code', 'description']);
+        $input = Arr::only($request->all(), ['code', 'description', 'color']);
         $input['created_by'] = Auth::user()->id;
         BlackistStatus::create($input);
         return redirect(route('blacklist-status.index'))->with('success', 'Created successfully');
@@ -59,8 +62,10 @@ class BlacklistStatusController extends Controller
 
     public function edit($id)
     {
+        $color = ['secondary', 'dark', 'primary', 'info', 'success', 'warning', 'danger'];
+
         $data = BlackistStatus::find($id);
-        return view('dashboard.blacklist-maintenance.blacklist-status.edit', compact('data'));
+        return view('dashboard.blacklist-maintenance.blacklist-status.edit', compact('data', 'color'));
     }
 
     public function update(Request $request, $id)
@@ -68,9 +73,11 @@ class BlacklistStatusController extends Controller
         $this->validate($request, [
             'code' => 'required|unique:blackist_statuses,code,' . $id,
             'description' => 'required',
+            'color' => 'required',
+
         ]);
 
-        $input = Arr::only($request->all(), ['code', 'description']);
+        $input = Arr::only($request->all(), ['code', 'description', 'color']);
         $input['updated_by'] = Auth::user()->id;
         BlackistStatus::find($id)->update($input);
         return redirect(route('blacklist-status.index'))->with('success', 'Update successfully');

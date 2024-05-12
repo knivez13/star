@@ -53,7 +53,7 @@
                             @endcan
                         </tr>
                         @forelse($datas as $a)
-                        <tr>
+                        <tr class="bg-{{$a->color}}">
                             <td style="margin: 0; white-space: nowrap;"><a href="{{ route('blacklist-status.edit', $a->id) }}">{{ $a->code }}</a></td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->created_at }}</td>

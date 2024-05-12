@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('code')->unique();
             $table->longText('description');
+            $table->string('color');
             $table->enum('status', ['Inactive', 'Active'])->default('Active');
             $table->timestamps();
             $table->uuid('created_by')->nullable();

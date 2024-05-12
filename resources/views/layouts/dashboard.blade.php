@@ -109,10 +109,10 @@
                                     <span>Briefing Logs</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{(strpos(Route::currentRouteName(), 'blacklist.index') === 0) ? 'active' : ''}}">
+                                <a href="{{ route('blacklist.index') }}">
                                     <i class="si si-user-unfollow"></i>
-                                    <span>Blacklist</span>
+                                    <span>Barred Patrons</span>
                                 </a>
                             </li>
 
