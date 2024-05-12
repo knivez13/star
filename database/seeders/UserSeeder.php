@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Maintenance\ReportStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
@@ -22,5 +23,15 @@ class UserSeeder extends Seeder
             'email' => 'bonjourdeguzman@gmail.com',
             'password' => Hash::make('password'),
         ]);
+
+        $reportstatus = [
+            'Pending',
+            'Close for Reply',
+            'Total Close',
+            'Void'
+        ];
+        foreach ($reportstatus as $q) {
+            ReportStatus::create(['code' => $q, 'description' => $q]);
+        }
     }
 }

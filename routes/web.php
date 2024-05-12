@@ -20,7 +20,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('briefing-logs', App\Http\Controllers\BriefingLogsController::class);
     Route::resource('daily-logs', App\Http\Controllers\DailyLogsController::class);
-    Route::resource('incident-report', App\Http\Controllers\IncidentReportController::class);
+    Route::resource('tracker', App\Http\Controllers\IncidentReportController::class);
+    Route::get('tracker/link/{id}', [App\Http\Controllers\IncidentReportController::class, 'link'])->name('traker.link');
     Route::resource('blacklist', App\Http\Controllers\BlacklistController::class);
 
     Route::group(['prefix' => 'system-maintenance'], function () {

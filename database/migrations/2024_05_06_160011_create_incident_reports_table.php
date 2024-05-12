@@ -61,8 +61,7 @@ return new class extends Migration
             $table->uuid('inspector_id')->nullable();
             $table->foreign('inspector_id')->references('id')->on('inspectors');
 
-            $table->boolean('for_head')->nullable();
-            $table->boolean('for_supervisor')->nullable();
+            $table->boolean('for_head_reply')->nullable();
 
             $table->string('verified_by')->nullable();
             $table->timestamps();

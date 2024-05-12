@@ -91,8 +91,8 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
+                            <li class="{{(strpos(Route::currentRouteName(), 'tracker.index') === 0) ? 'active' : ''}}">
+                                <a href="{{ route('tracker.index') }}">
                                     <i class="si si-info"></i>
                                     <span>Tracker</span>
                                 </a>
