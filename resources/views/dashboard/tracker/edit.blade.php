@@ -26,9 +26,9 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        Edit Incident Report @if ($data->synopsis) - {{$data->linkReport->synopsis}} @endif
+                        Edit Incident Report @if ($data->link_report) - {{$data->linkReport->synopsis ?? null}} @endif
                     </h4>
-                    <input type="hidden" class="form-control" name="link_report" value="{{ $data->linkReport->id }}">
+                    <input type="hidden" class="form-control" name="link_report" value="{{ $data->linkReport->id ?? null}}">
 
                 </div>
 
