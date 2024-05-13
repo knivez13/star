@@ -46,8 +46,13 @@
                     <p class="mb-1"><strong>Details</strong> : {{$data->details ?? null}}</p>
                     <p class="mb-1"><strong>Action Taken</strong> : {{$data->action_taken ?? null}}</p>
                     <p class="mb-1"><strong>Inspector</strong> : {{$data->inspector->description ?? null}}</p>
-                    <p class="mb-1"><strong>Verified By</strong> : {{$data->verified_by ?? null}}</p>
-                    <!-- {{ json_encode($data)}} -->
+                    <p class="mb-5"><strong>Verified By</strong> : {{$data->verified_by ?? null}}</p>
+                    @if ($incidentBlacklist)
+                    <p class="mb-1 fs-20"><strong>Blacklisted</strong></p>
+                    @foreach ( $incidentBlacklist as $a )
+                    <p class="mb-1"><strong>{{$a->blacklist->last_name ?? null}},{{$a->blacklist->first_name ?? null}} {{$a->blacklist->middle_name ?? null}}</strong> : {{$a->blacklist->member_id ?? null}} :{{$a->blacklist->date_hired ?? null}} </p>
+                    @endforeach
+                    @endif
                 </div>
 
             </div>

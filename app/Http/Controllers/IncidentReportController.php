@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Blacklist;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\IncidentReport;
 use App\Models\Maintenance\Area;
+use App\Models\IncidentBlacklist;
 use App\Models\Maintenance\Result;
+use Illuminate\Support\Facades\DB;
 use App\Models\Maintenance\Currency;
 use App\Models\Maintenance\Location;
 use App\Models\Maintenance\Property;
@@ -60,8 +63,8 @@ class IncidentReportController extends Controller
         $property = Property::select('id', 'code', 'description')->get();
         $reporttype = ReportType::select('id', 'code', 'description')->get();
         $result = Result::select('id', 'code', 'description')->get();
-
-        return view('dashboard.tracker.create', compact('area', 'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
+        $blacklist = Blacklist::get();
+        return view('dashboard.tracker.create', compact('blacklist', 'area', 'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function link($id)
@@ -78,47 +81,62 @@ class IncidentReportController extends Controller
         $reporttype = ReportType::select('id', 'code', 'description')->get();
         $result = Result::select('id', 'code', 'description')->get();
         $link = IncidentReport::where('id', '=', $id)->first();
+        $blacklist = Blacklist::get();
 
-        return view('dashboard.tracker.link', compact('area', 'link', 'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
+        return view('dashboard.tracker.link', compact('blacklist', 'area', 'link', 'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'property_id' => 'required',
-            'group_section_id' => 'required',
-            'area_id' => 'required',
-            'location_id' => 'required',
-            'event_date' => 'required',
-            'department_id' => 'required',
-            'report_type_id' => 'required',
-            'incident_title_id' => 'required',
-            'origin_id' => 'required',
-            'result_id' => 'required',
-            'details' => 'required',
-            'action_taken' => 'required',
-            'inspector_id' => 'required',
-        ]);
-        $year = Carbon::now()->format('Y');
-        $total = IncidentReport::whereYear('created_at', Carbon::now())->get()->count();
-        $property = Property::where('id', '=', $request->property_id)->first()->code;
-        $groupsection = GroupSection::where('id', '=', $request->group_section_id)->first()->code;
+        DB::transaction(
+            function () use ($request) {
+                $this->validate($request, [
+                    'property_id' => 'required',
+                    'group_section_id' => 'required',
+                    'area_id' => 'required',
+                    'location_id' => 'required',
+                    'event_date' => 'required',
+                    'department_id' => 'required',
+                    'report_type_id' => 'required',
+                    'incident_title_id' => 'required',
+                    'origin_id' => 'required',
+                    'result_id' => 'required',
+                    'details' => 'required',
+                    'action_taken' => 'required',
+                    'inspector_id' => 'required',
+                ]);
+                $year = Carbon::now()->format('Y');
+                $total = IncidentReport::whereYear('created_at', Carbon::now())->get()->count();
+                $property = Property::where('id', '=', $request->property_id)->first()->code;
+                $groupsection = GroupSection::where('id', '=', $request->group_section_id)->first()->code;
 
-        $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'area_id', 'location_id', 'description', 'event_date', 'department_id', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
-        $input['synopsis'] = $year . '/' . $property . '/' . $groupsection . '/' . sprintf("%05d", $total + 1);
-        $input['created_by'] = Auth::user()->id;
-        $input['report_status_id'] = ReportStatus::where('description', '=', 'Pending')->first()->id;
-        IncidentReport::create($input);
+                $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'area_id', 'location_id', 'description', 'event_date', 'department_id', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
+                $input['synopsis'] = $year . '/' . $property . '/' . $groupsection . '/' . sprintf("%05d", $total + 1);
+                $input['created_by'] = Auth::user()->id;
+                $input['report_status_id'] = ReportStatus::where('description', '=', 'Pending')->first()->id;
+                $ir = IncidentReport::create($input);
+                $input2 = Arr::only($request->all(), ['blacklist']);
+
+                if (!empty($input2['blacklist'])) {
+                    foreach ($input2['blacklist'] as $q) {
+                        IncidentBlacklist::create([
+                            'blacklist_id' => $q,
+                            'incident_report_id' => $ir->id
+                        ]);
+                    }
+                }
+            }
+        );
+
         return redirect(route('tracker.index'))->with('success', 'Created successfully');
     }
 
     public function show($id)
     {
         $data = IncidentReport::where('id', '=', $id)->first();
-        // return $data->with('area', 'currency', 'department', 'groupSection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reportType', 'result', 'reportStatus');
-        return view('dashboard.tracker.show', compact('data'));
+        $incidentBlacklist = IncidentBlacklist::where('incident_report_id', '=', $id)->with('blacklist')->get();
+        return view('dashboard.tracker.show', compact('data', 'incidentBlacklist'));
     }
-
     public function edit($id)
     {
         $area = Area::select('id', 'code', 'description')->get();
@@ -132,32 +150,49 @@ class IncidentReportController extends Controller
         $property = Property::select('id', 'code', 'description')->get();
         $reporttype = ReportType::select('id', 'code', 'description')->get();
         $result = Result::select('id', 'code', 'description')->get();
+        $blacklist = Blacklist::get();
+        $incidentBlacklist = IncidentBlacklist::where('incident_report_id', '=', $id)->get()->pluck('blacklist_id');
 
         $data = IncidentReport::find($id);
-        return view('dashboard.tracker.edit', compact('data', 'area',  'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
+        return view('dashboard.tracker.edit', compact('blacklist', 'incidentBlacklist', 'data', 'area',  'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'property_id' => 'required',
-            'group_section_id' => 'required',
-            'area_id' => 'required',
-            'location_id' => 'required',
-            'event_date' => 'required',
-            'department_id' => 'required',
-            'report_type_id' => 'required',
-            'incident_title_id' => 'required',
-            'origin_id' => 'required',
-            'result_id' => 'required',
-            'details' => 'required',
-            'action_taken' => 'required',
-            'inspector_id' => 'required',
-        ]);
+        DB::transaction(
+            function () use ($request, $id) {
+                $this->validate($request, [
+                    'property_id' => 'required',
+                    'group_section_id' => 'required',
+                    'area_id' => 'required',
+                    'location_id' => 'required',
+                    'event_date' => 'required',
+                    'department_id' => 'required',
+                    'report_type_id' => 'required',
+                    'incident_title_id' => 'required',
+                    'origin_id' => 'required',
+                    'result_id' => 'required',
+                    'details' => 'required',
+                    'action_taken' => 'required',
+                    'inspector_id' => 'required',
+                ]);
 
-        $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'area_id', 'location_id', 'description', 'event_date', 'department_id', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
-        $input['updated_by'] = Auth::user()->id;
-        IncidentReport::find($id)->update($input);
+                $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'area_id', 'location_id', 'description', 'event_date', 'department_id', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
+                $input['updated_by'] = Auth::user()->id;
+                IncidentReport::find($id)->update($input);
+                $input2 = Arr::only($request->all(), ['blacklist']);
+
+                if (!empty($input2['blacklist'])) {
+                    IncidentBlacklist::where('incident_report_id', '=', $id)->delete();
+                    foreach ($input2['blacklist'] as $q) {
+                        IncidentBlacklist::create([
+                            'blacklist_id' => $q,
+                            'incident_report_id' => $id
+                        ]);
+                    }
+                }
+            }
+        );
         return redirect(route('tracker.index'))->with('success', 'Update successfully');
     }
 

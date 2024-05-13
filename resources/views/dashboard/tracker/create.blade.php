@@ -249,7 +249,19 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Blacklist</label>
+                            <select class="form-control select2" multiple="multiple" size="5" data-placeholder="Select on Blacklist" name="blacklist[]">
+                                @foreach ($blacklist as $a)
+                                <option value="{{$a->id}}" {{$a->id == old('blacklist')? 'selected':''}}>{{$a->last_name}}, {{$a->first_name}} {{$a->middle_name}} </option>
+                                @endforeach
+                            </select> @if($errors->has('details'))
+                            <div class=" text-danger">{{ $errors->first('details') }}
+                            </div>
+                            @endif
+                        </div>
+                    </div>
 
 
 
