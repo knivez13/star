@@ -123,7 +123,7 @@
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('department.description','Department')</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('origination.description','Origination')</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('created_at','Date Created')</th>
-                            @can('view-created-updated')
+                            @can('Show Create and Update User')
                             <th style="margin: 0; white-space: nowrap;">Created by</th>
                             <th style="margin: 0; white-space: nowrap;">Updated at</th>
                             <th style="margin: 0; white-space: nowrap;">Updated by</th>
@@ -146,7 +146,7 @@
                             <td style="margin: 0; white-space: nowrap;">{{ $a->department->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->origination->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->created_at }}</td>
-                            @can('view-created-updated')
+                            @can('Show Create and Update User')
                             <td style="margin: 0; white-space: nowrap;">{{ $a->createdBy->first_name ?? '' }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->updated_at }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->updatedBy->first_name ?? '' }}</td>

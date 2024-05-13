@@ -20,9 +20,9 @@ class PermissionSeeder extends Seeder
 
         $users = [
 
-            'Show Create and Update Date',
             'Show Create and Update User',
             'Show All Department Report',
+            'Close For Reply',
 
             'View Dashboard',
 

@@ -46,7 +46,7 @@
                             <th>@sortablelink('code')</th>
                             <th>@sortablelink('description')</th>
                             <th>@sortablelink('created_at','Date Created')</th>
-                            @can('view-created-updated')
+                            @can('Show Create and Update User')
                             <th>Created by</th>
                             <th>Updated at</th>
                             <th>Updated by</th>
@@ -57,7 +57,7 @@
                             <td style="margin: 0; white-space: nowrap;"><a href="{{ route('blacklist-status.edit', $a->id) }}">{{ $a->code }}</a></td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->created_at }}</td>
-                            @can('view-created-updated')
+                            @can('Show Create and Update User')
                             <td style="margin: 0; white-space: nowrap;">{{ $a->createdBy->first_name ?? '' }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->updated_at }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->updatedBy->first_name ?? '' }}</td>
