@@ -35785,9 +35785,9 @@ button.btn.dropdown-toggle:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
-    min-width: 50px;
+    /* min-width: 50px;
     padding: 1rem;
-    margin: 0 3px;
+    margin: 0 3px; */
     text-decoration: none;
     cursor: pointer;
     color: #737373;

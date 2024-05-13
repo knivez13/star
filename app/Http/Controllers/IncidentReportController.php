@@ -82,47 +82,47 @@ class IncidentReportController extends Controller
 
         $datas = $list->paginate(10);
 
-        $area = Area::select('id', 'code', 'description')->get();
-        $department = Department::select('id', 'code', 'description')->get();
-        $groupsection = GroupSection::select('id', 'code', 'description')->get();
-        $location = Location::select('id', 'code', 'description')->get();
-        $origination = Origination::select('id', 'code', 'description')->get();
-        $property = Property::select('id', 'code', 'description')->get();
-        $reportstatus = ReportStatus::select('id', 'code', 'description')->get();
+        $area = Area::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $department = Department::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $groupsection = GroupSection::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $location = Location::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $origination = Origination::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $property = Property::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $reportstatus = ReportStatus::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
 
         return view('dashboard.tracker.index', compact('datas', 'property', 'groupsection', 'department', 'area', 'location', 'origination', 'reportstatus'));
     }
 
     public function create()
     {
-        $area = Area::select('id', 'code', 'description')->get();
-        $currency = Currency::select('id', 'code', 'description')->get();
-        $department = Department::select('id', 'code', 'description')->get();
-        $groupsection = GroupSection::select('id', 'code', 'description')->get();
-        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->get();
-        $inspector = Inspector::select('id', 'code', 'description')->get();
-        $location = Location::select('id', 'code', 'description')->get();
-        $origination = Origination::select('id', 'code', 'description')->get();
-        $property = Property::select('id', 'code', 'description')->get();
-        $reporttype = ReportType::select('id', 'code', 'description')->get();
-        $result = Result::select('id', 'code', 'description')->get();
+        $area = Area::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $currency = Currency::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $department = Department::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $groupsection = GroupSection::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $inspector = Inspector::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $location = Location::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $origination = Origination::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $property = Property::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $reporttype = ReportType::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $result = Result::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
         $blacklist = Blacklist::get();
         return view('dashboard.tracker.create', compact('blacklist', 'area', 'currency', 'department', 'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function link($id)
     {
-        $area = Area::select('id', 'code', 'description')->get();
-        $currency = Currency::select('id', 'code', 'description')->get();
-        $department = Department::select('id', 'code', 'description')->get();
-        $groupsection = GroupSection::select('id', 'code', 'description')->get();
-        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->get();
-        $inspector = Inspector::select('id', 'code', 'description')->get();
-        $location = Location::select('id', 'code', 'description')->get();
-        $origination = Origination::select('id', 'code', 'description')->get();
-        $property = Property::select('id', 'code', 'description')->get();
-        $reporttype = ReportType::select('id', 'code', 'description')->get();
-        $result = Result::select('id', 'code', 'description')->get();
+        $area = Area::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $currency = Currency::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $department = Department::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $groupsection = GroupSection::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $inspector = Inspector::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $location = Location::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $origination = Origination::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $property = Property::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $reporttype = ReportType::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $result = Result::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
         $link = IncidentReport::where('id', '=', $id)->first();
         $blacklist = Blacklist::get();
 
@@ -182,17 +182,17 @@ class IncidentReportController extends Controller
     }
     public function edit($id)
     {
-        $area = Area::select('id', 'code', 'description')->get();
-        $currency = Currency::select('id', 'code', 'description')->get();
-        $department = Department::select('id', 'code', 'description')->get();
-        $groupsection = GroupSection::select('id', 'code', 'description')->get();
-        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->get();
-        $inspector = Inspector::select('id', 'code', 'description')->get();
-        $location = Location::select('id', 'code', 'description')->get();
-        $origination = Origination::select('id', 'code', 'description')->get();
-        $property = Property::select('id', 'code', 'description')->get();
-        $reporttype = ReportType::select('id', 'code', 'description')->get();
-        $result = Result::select('id', 'code', 'description')->get();
+        $area = Area::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $currency = Currency::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $department = Department::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $groupsection = GroupSection::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $inspector = Inspector::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $location = Location::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $origination = Origination::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $property = Property::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $reporttype = ReportType::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
+        $result = Result::select('id', 'code', 'description')->sortable(['description' => 'desc'])->get();
         $blacklist = Blacklist::get();
         $incidentBlacklist = IncidentBlacklist::where('incident_report_id', '=', $id)->get()->pluck('blacklist_id');
 
