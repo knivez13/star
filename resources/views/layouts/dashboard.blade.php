@@ -137,7 +137,6 @@
                                     <li class="{{(strpos(Route::currentRouteName(), 'inspector.index') === 0) ? 'active' : ''}}"><a href="{{ route('inspector.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Inspector</a></li>
                                     <li class="{{(strpos(Route::currentRouteName(), 'origination.index') === 0) ? 'active' : ''}}"><a href="{{ route('origination.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Origination</a></li>
                                     <li class="{{(strpos(Route::currentRouteName(), 'result.index') === 0) ? 'active' : ''}}"><a href="{{ route('result.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Result</a></li>
-                                    <li class="{{(strpos(Route::currentRouteName(), 'report-status.index') === 0) ? 'active' : ''}}"><a href="{{ route('report-status.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Report Status</a></li>
                                 </ul>
                             </li>
 

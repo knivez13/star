@@ -13,10 +13,10 @@ class DailyLogsController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:view-maintenance-business-units-list', ['only' => ['index']]);
-        // $this->middleware('permission:view-maintenance-business-units-add', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:view-maintenance-business-units-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:view-maintenance-business-units-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Daily Logs', ['only' => ['index']]);
+        $this->middleware('permission:Create Daily Logs', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Update Daily Logs', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Delete Daily Logs', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)

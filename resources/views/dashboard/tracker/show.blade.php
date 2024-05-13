@@ -68,7 +68,7 @@
                         <a href="{{ route('traker.link', $data->id) }}" class="btn btn-info form-control">Create Link Report</a>
                     </div>
                     <div class="col-12 mb-3">
-                        <a href="{{ route('traker.link', $data->id) }}" class="btn btn-secondary form-control">Reply For Close</a>
+                        <a href="{{ route('traker.link', $data->id) }}" class="btn btn-secondary form-control">Close for Reply</a>
                     </div>
                     <div class="col-12 mb-3">
                         <a href="{{ route('traker.link', $data->id) }}" class="btn btn-success form-control">Total Close</a>

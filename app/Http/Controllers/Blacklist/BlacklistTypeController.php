@@ -12,10 +12,10 @@ class BlacklistTypeController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:view-maintenance-business-units-list', ['only' => ['index']]);
-        // $this->middleware('permission:view-maintenance-business-units-add', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:view-maintenance-business-units-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:view-maintenance-business-units-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Blacklist Setting', ['only' => ['index']]);
+        $this->middleware('permission:Create Blacklist Setting', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Update Blacklist Setting', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Delete Blacklist Setting', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)

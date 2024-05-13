@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Maintenance\Result;
+use Spatie\Permission\Models\Role;
 use App\Models\Maintenance\Currency;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Maintenance\Inspector;
@@ -12,6 +13,7 @@ use App\Models\Blacklist\BlackistType;
 use App\Models\Blacklist\BlackistStatus;
 use App\Models\Maintenance\GroupSection;
 use App\Models\Maintenance\ReportStatus;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
@@ -21,7 +23,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $user = User::create([
             'emp_id' => '123123',
             'first_name' => 'Bonjour',
             'middle_name' => 'Lopez',
@@ -29,6 +31,10 @@ class UserSeeder extends Seeder
             'email' => 'bonjourdeguzman@gmail.com',
             'password' => Hash::make('password'),
         ]);
+        $role = Role::create(['name' => 'SystemAdmin']);
+        $permissions = Permission::pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole('SystemAdmin');
 
         $reportstatus = [
             'Pending',

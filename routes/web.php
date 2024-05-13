@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('location', App\Http\Controllers\Maintenance\LocationController::class);
         Route::resource('origination', App\Http\Controllers\Maintenance\OriginationController::class);
         Route::resource('property', App\Http\Controllers\Maintenance\PropertyController::class);
-        Route::resource('report-status', App\Http\Controllers\Maintenance\ReportStatusController::class);
+        // Route::resource('report-status', App\Http\Controllers\Maintenance\ReportStatusController::class);
         Route::resource('report-type', App\Http\Controllers\Maintenance\ReportTypeController::class);
         Route::resource('result', App\Http\Controllers\Maintenance\ResultController::class);
     });

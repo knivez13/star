@@ -27,14 +27,16 @@ class IncidentReportController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:view-maintenance-business-units-list', ['only' => ['index']]);
-        // $this->middleware('permission:view-maintenance-business-units-add', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:view-maintenance-business-units-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:view-maintenance-business-units-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Tracker', ['only' => ['index']]);
+        $this->middleware('permission:Create Tracker', ['only' => ['create', 'store', 'link']]);
+        $this->middleware('permission:Update Tracker', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Delete Tracker', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
     {
+        $user = Auth::user();
+
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
         $property_id = Arr::get($requestParams, 'property_id', '');
@@ -45,6 +47,13 @@ class IncidentReportController extends Controller
         $origin_id = Arr::get($requestParams, 'origin_id', '');
         $report_status_id = Arr::get($requestParams, 'report_status_id', '');
         $list = IncidentReport::query();
+
+
+        if (!$user->can('Show All Department Report')) {
+            $list->where('for_head_reply', '=', 1);
+            $list->where('department_id', '=', $user->department_id);
+        }
+
         if (!empty($search)) {
             $list->where('synopsis', 'LIKE', '%' . $search . '%');
             $list->orWhere('description', 'LIKE', '%' . $search . '%');

@@ -12,10 +12,10 @@ class UserLevelController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:view-maintenance-business-units-list', ['only' => ['index']]);
-        // $this->middleware('permission:view-maintenance-business-units-add', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:view-maintenance-business-units-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:view-maintenance-business-units-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View User Setting', ['only' => ['index']]);
+        $this->middleware('permission:Create User Setting', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Update User Setting', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Delete User Setting', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
