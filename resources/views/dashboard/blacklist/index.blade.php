@@ -88,6 +88,7 @@
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('date_hired','Date Hired')</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('blackistStatus.description','Status')</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('blackistType.description ','Type')</th>
+                            <th style="margin: 0; white-space: nowrap;">Synopsis</th>
                             <th style="margin: 0; white-space: nowrap;">Image</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('created_at','Date Created')</th>
                             @can('view-created-updated')
@@ -105,6 +106,12 @@
                             <td style="margin: 0; white-space: nowrap;">{{ $a->date_hired }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->blackistStatus->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->blackistType->description }}</td>
+                            <td>
+                                @foreach ( $a->incidentReport as $a)
+                                <a href="{{ route('tracker.show', $a->incidentReport->id) }}">{{ $a->incidentReport->synopsis }}</a>
+                                @endforeach
+
+                            </td>
                             <td class="no-padding" style="margin: 0; white-space: nowrap;">
                                 <a class="avatar avatar-sm">
                                     <img src="{{$a->image_path}}">

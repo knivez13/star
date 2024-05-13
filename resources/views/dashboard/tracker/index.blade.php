@@ -37,31 +37,72 @@
                     @method('GET')
                     <div class="p-10">
                         <div class="row">
-                            <div class="col-12 col-md-5 mb-3">
+                            <div class="col-12 col-md-3 mb-3">
                                 <input placeholder="Search.." type="search" value="{{ app('request')->input('search') }}" class="form-control " name="search" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-secondary" style="display: block;">
                             </div>
                             <div class="col-12 col-md-2 mb-3">
                                 <input placeholder="Search by date" type="date" value="{{ app('request')->input('date_search') }}" class="form-control " name="date_search" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-secondary" style="display: block;">
                             </div>
+                            <div class="col-12 col-md-2 mb-3 ">
+                                <select class="form-control select2 " style="width: 100%;" name="property_id" value="{{ old('property_id') }}">
+                                    <option value="">Select Property</option>
+                                    @foreach ($property ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('property_id')? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             <div class="col-12 col-md-2 mb-3">
                                 <select class="form-control select2" style="width: 100%;" name="group_section_id" value="{{ old('group_section_id') }}">
                                     <option value="">Select Group Section</option>
-                                    @foreach ($group_section ?? [] as $a)
+                                    @foreach ($groupsection ?? [] as $a)
                                     <option value="{{$a->id}}" {{$a->id == app('request')->input('group_section_id')? 'selected':''}}>{{$a->description}}</option>
                                     @endforeach
 
                                 </select>
                             </div>
                             <div class="col-12 col-md-2 mb-3">
-                                <select class="form-control select2" style="width: 100%;" name="origination_id" value="{{ old('origination_id') }}">
-                                    <option value="">Select Origination</option>
-                                    @foreach ($origin ?? [] as $a)
-                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('origination_id')? 'selected':''}}>{{$a->description}}</option>
+                                <select class="form-control select2" style="width: 100%;" name="department_id" value="{{ old('department_id') }}">
+                                    <option value="">Select Department</option>
+                                    @foreach ($department ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('department_id')? 'selected':''}}>{{$a->description}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-12 col-md-1 mb-1">
                                 <button class="btn btn-primary btn-sm form-control">Search</button>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <select class="form-control select2" style="width: 100%;" name="area_id" value="{{ old('area_id') }}">
+                                    <option value="">Select Area</option>
+                                    @foreach ($area ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('area_id')? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <select class="form-control select2" style="width: 100%;" name="location_id" value="{{ old('location_id') }}">
+                                    <option value="">Select Location</option>
+                                    @foreach ($location ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('location_id')? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <select class="form-control select2" style="width: 100%;" name="origin_id" value="{{ old('origin_id') }}">
+                                    <option value="">Select Origination</option>
+                                    @foreach ($origination ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('origin_id')? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <select class="form-control select2" style="width: 100%;" name="report_status_id" value="{{ old('report_status_id') }}">
+                                    <option value="">Select Status</option>
+                                    @foreach ($reportstatus ?? [] as $a)
+                                    <option value="{{$a->id}}" {{$a->id == app('request')->input('report_status_id')? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

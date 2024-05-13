@@ -37,17 +37,51 @@ class IncidentReportController extends Controller
     {
         $requestParams = $request->all();
         $search = Arr::get($requestParams, 'search', '');
+        $property_id = Arr::get($requestParams, 'property_id', '');
+        $group_section_id = Arr::get($requestParams, 'group_section_id', '');
+        $department_id = Arr::get($requestParams, 'department_id', '');
+        $area_id = Arr::get($requestParams, 'area_id', '');
+        $location_id = Arr::get($requestParams, 'location_id', '');
+        $origin_id = Arr::get($requestParams, 'origin_id', '');
+        $report_status_id = Arr::get($requestParams, 'report_status_id', '');
         $list = IncidentReport::query();
         if (!empty($search)) {
             $list->where('synopsis', 'LIKE', '%' . $search . '%');
             $list->orWhere('description', 'LIKE', '%' . $search . '%');
             $list->orWhere('details', 'LIKE', '%' . $search . '%');
         }
+        if (!empty($property_id)) {
+            $list->where('property_id', '=', $property_id);
+        }
+        if (!empty($group_section_id)) {
+            $list->where('group_section_id', '=', $group_section_id);
+        }
+        if (!empty($department_id)) {
+            $list->where('department_id', '=', $department_id);
+        }
+        if (!empty($area_id)) {
+            $list->where('area_id', '=', $area_id);
+        }
+        if (!empty($origin_id)) {
+            $list->where('origin_id', '=', $origin_id);
+        }
+        if (!empty($report_status_id)) {
+            $list->where('report_status_id', '=', $report_status_id);
+        }
         $list->sortable(['created_at' => 'desc']);
         $list->with('createdBy', 'updatedBy', 'linkReport', 'area', 'currency', 'department', 'groupSection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reportType', 'result', 'reportStatus');
 
         $datas = $list->paginate(10);
-        return view('dashboard.tracker.index', compact('datas'));
+
+        $area = Area::select('id', 'code', 'description')->get();
+        $department = Department::select('id', 'code', 'description')->get();
+        $groupsection = GroupSection::select('id', 'code', 'description')->get();
+        $location = Location::select('id', 'code', 'description')->get();
+        $origination = Origination::select('id', 'code', 'description')->get();
+        $property = Property::select('id', 'code', 'description')->get();
+        $reportstatus = ReportStatus::select('id', 'code', 'description')->get();
+
+        return view('dashboard.tracker.index', compact('datas', 'property', 'groupsection', 'department', 'area', 'location', 'origination', 'reportstatus'));
     }
 
     public function create()

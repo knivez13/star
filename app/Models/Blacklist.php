@@ -24,6 +24,11 @@ class Blacklist extends Model
         return $this->belongsTo(BlackistStatus::class, 'blackist_status_id');
     }
 
+    public function incidentReport()
+    {
+        return $this->hasmany(IncidentBlacklist::class, 'blacklist_id', 'id');
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by')->select('id', 'first_name', 'middle_name', 'last_name');
