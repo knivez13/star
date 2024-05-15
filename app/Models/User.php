@@ -3,6 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Maintenance\Department;
+use App\Models\Users\UserDesignation;
+use App\Models\Users\UserLevel;
 use App\Traits\Uuids;
 use Kyslik\ColumnSortable\Sortable;
 use Spatie\Permission\Traits\HasRoles;
@@ -37,6 +41,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id')->select('id', 'code', 'description');
+    }
+
+    public function userLevel()
+    {
+        return $this->belongsTo(UserLevel::class, 'user_level_id')->select('id', 'code', 'description');
+    }
+
+    public function userDesignation()
+    {
+        return $this->belongsTo(UserDesignation::class, 'user_designation_id')->select('id', 'code', 'description');
     }
 
     public function createdBy()

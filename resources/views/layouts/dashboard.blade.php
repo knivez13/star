@@ -149,8 +149,8 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>User List</a></li>
-                                    <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="#"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Roles</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'users.index') === 0) ? 'active' : ''}}"><a href="{{ route('users.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>User List</a></li>
+                                    <li class="{{(strpos(Route::currentRouteName(), 'roles.index') === 0) ? 'active' : ''}}"><a href="{{ route('roles.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Roles</a></li>
                                     <li class="{{(strpos(Route::currentRouteName(), 'user-designation.index') === 0) ? 'active' : ''}}"><a href="{{ route('user-designation.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Designation</a></li>
                                     <li class="{{(strpos(Route::currentRouteName(), 'user-level.index') === 0) ? 'active' : ''}}"><a href="{{ route('user-level.index') }}"><i class="icon-Briefcase"><span class="path1"></span><span class="path2"></span></i>Level</a></li>
                                 </ul>

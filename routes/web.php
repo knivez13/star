@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'user-maintenance'], function () {
         Route::resource('user-designation', App\Http\Controllers\Users\UserDestinationController::class);
         Route::resource('user-level', App\Http\Controllers\Users\UserLevelController::class);
+        Route::resource('roles', App\Http\Controllers\Users\RoleController::class);
+        Route::resource('users', App\Http\Controllers\Users\UserController::class);
     });
 
     Route::group(['prefix' => 'blacklist-maintenance'], function () {
