@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('code')->unique();
-            $table->longText('description');
+            $table->string('code')->nullable();
+            $table->longText('description')->nullable();
+            $table->uuid('area_id')->nullable();
+            $table->foreign('area_id')->references('id')->on('areas');
             $table->enum('status', ['Inactive', 'Active'])->default('Active');
             $table->timestamps();
             $table->uuid('created_by')->nullable();

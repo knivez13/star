@@ -36,21 +36,21 @@
                     <p class="mb-1"><strong>Event Date</strong> : {{$data->event_date ?? null}}</p>
                     <p class="mb-1"><strong>Area</strong> : {{$data->area->description ?? null}}</p>
                     <p class="mb-1"><strong>Location</strong> : {{$data->location->description ?? null}}</p>
-                    <p class="mb-1"><strong>Description</strong> : {{$data->description ?? null}}</p>
+                    <!-- <p class="mb-1"><strong>Description</strong> : {{$data->description ?? null}}</p> -->
                     <p class="mb-1"><strong>Department</strong> : {{$data->department->description ?? null}}</p>
                     <p class="mb-1"><strong>Report Type</strong> : {{$data->reportType->description ?? null}}</p>
                     <p class="mb-1"><strong>Origination</strong> : {{$data->Origination->description ?? null}}</p>
                     <p class="mb-1"><strong>Result</strong> : {{$data->result->description ?? null}}</p>
                     <p class="mb-1"><strong>Currency</strong> : {{$data->currency->description ?? null}}</p>
-                    <p class="mb-1"><strong>Total Value</strong> : {{$data->total_value ?? null}}</p>
+                    <!-- <p class="mb-1"><strong>Total Value</strong> : {{$data->total_value ?? null}}</p> -->
                     <p class="mb-1"><strong>Details</strong> : {{$data->details ?? null}}</p>
                     <p class="mb-1"><strong>Action Taken</strong> : {{$data->action_taken ?? null}}</p>
-                    <p class="mb-1"><strong>Inspector</strong> : {{$data->inspector->description ?? null}}</p>
+                    <!-- <p class="mb-1"><strong>Inspector</strong> : {{$data->inspector->description ?? null}}</p> -->
                     <p class="mb-5"><strong>Verified By</strong> : {{$data->verified_by ?? null}}</p>
                     @if ($incidentBlacklist)
                     <p class="mb-1 fs-20"><strong>Blacklisted</strong></p>
                     @foreach ( $incidentBlacklist as $a )
-                    <p class="mb-1"><strong>{{$a->blacklist->last_name ?? null}},{{$a->blacklist->first_name ?? null}} {{$a->blacklist->middle_name ?? null}}</strong> : {{$a->blacklist->member_id ?? null}} :{{$a->blacklist->date_hired ?? null}} </p>
+                    <p class="mb-1">Type: {{$a->type ?? null}} |Full Name: <strong>{{$a->last_name ?? null}},{{$a->first_name ?? null}} </strong> | Member ID: {{$a->blacklist->member_id ?? null}} | Barred:{{$a->barred ?? null}}| Initiator:{{$a->initiator ?? null}} </p>
                     @endforeach
                     @endif
                 </div>
@@ -68,13 +68,16 @@
                         <a href="{{ route('traker.link', $data->id) }}" class="btn btn-info form-control">Create Link Report</a>
                     </div>
                     <div class="col-12 mb-3">
-                        <a href="{{ route('traker.link', $data->id) }}" class="btn btn-secondary form-control">Close for Reply</a>
+                        <a href="{{ route('traker.closereply', $data->id) }}" class="btn btn-secondary form-control">Close for Reply</a>
                     </div>
                     <div class="col-12 mb-3">
-                        <a href="{{ route('traker.link', $data->id) }}" class="btn btn-success form-control">Total Close</a>
+                        <a href="{{ route('traker.returnHead', $data->id) }}" class="btn btn-secondary form-control">Return to Surv</a>
                     </div>
                     <div class="col-12 mb-3">
-                        <a href="{{ route('traker.link', $data->id) }}" class="btn btn-danger form-control">Void</a>
+                        <a href="{{ route('traker.totalclose', $data->id) }}" class="btn btn-success form-control">Total Close</a>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="{{ route('traker.void', $data->id) }}" class="btn btn-danger form-control">Void</a>
                     </div>
                 </div>
             </div>

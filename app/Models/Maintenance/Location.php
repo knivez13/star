@@ -14,6 +14,11 @@ class Location extends Model
     use HasFactory, Uuids, SoftDeletes, Sortable;
     protected $guarded = [];
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id')->select('id', 'code', 'description');
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by')->select('id', 'first_name', 'middle_name', 'last_name');

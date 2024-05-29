@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('incident_titles', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('code')->unique();
-            $table->longText('description');
+            $table->string('code')->nullable();
+            $table->longText('description')->nullable();
+            $table->uuid('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->enum('status', ['Inactive', 'Active'])->default('Active');
             $table->timestamps();
             $table->uuid('created_by')->nullable();

@@ -42,7 +42,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required|unique:areas,code',
+            'code' => 'required',
             'description' => 'required',
         ]);
 

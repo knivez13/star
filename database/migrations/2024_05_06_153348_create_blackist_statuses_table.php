@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('blackist_statuses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('code')->unique();
-            $table->longText('description');
+            $table->string('code')->nullable();
+            $table->longText('description')->nullable();
             $table->string('color');
             $table->enum('status', ['Inactive', 'Active'])->default('Active');
             $table->timestamps();

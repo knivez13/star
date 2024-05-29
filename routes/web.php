@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes(
@@ -22,6 +22,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('daily-logs', App\Http\Controllers\DailyLogsController::class);
     Route::resource('tracker', App\Http\Controllers\IncidentReportController::class);
     Route::get('tracker/link/{id}', [App\Http\Controllers\IncidentReportController::class, 'link'])->name('traker.link');
+    Route::get('tracker/close/{id}', [App\Http\Controllers\IncidentReportController::class, 'closereply'])->name('traker.closereply');
+    Route::get('tracker/return/{id}', [App\Http\Controllers\IncidentReportController::class, 'returnHead'])->name('traker.returnHead');
+    Route::get('tracker/void/{id}', [App\Http\Controllers\IncidentReportController::class, 'void'])->name('traker.void');
+    Route::get('tracker/totalclose/{id}', [App\Http\Controllers\IncidentReportController::class, 'totalclose'])->name('traker.totalclose');
     Route::resource('blacklist', App\Http\Controllers\BlacklistController::class);
 
     Route::group(['prefix' => 'system-maintenance'], function () {

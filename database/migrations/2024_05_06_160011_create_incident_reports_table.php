@@ -34,7 +34,7 @@ return new class extends Migration
             $table->foreign('location_id')->references('id')->on('locations');
 
             $table->longText('description')->nullable();
-            $table->dateTime('event_date');
+            $table->date('event_date')->nullable();
 
             $table->uuid('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments');
@@ -55,13 +55,13 @@ return new class extends Migration
             $table->foreign('currency_id')->references('id')->on('currencies');
 
             $table->decimal('total_value', 18, 4)->nullable();
-            $table->longText('details');
-            $table->longText('action_taken');
+            $table->longText('details')->nullable();
+            $table->longText('action_taken')->nullable();
 
             $table->uuid('inspector_id')->nullable();
             $table->foreign('inspector_id')->references('id')->on('inspectors');
 
-            $table->boolean('for_head_reply')->nullable();
+            $table->tinyInteger('for_head_reply')->default(0);
 
             $table->string('verified_by')->nullable();
             $table->timestamps();

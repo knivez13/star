@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('incident_blacklists', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->uuid('blacklist_id')->nullable();
-            $table->foreign('blacklist_id')->references('id')->on('blacklists');
+            $table->string('type')->nullable();
+            $table->string('member_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('nationality')->nullable();
+            $table->boolean('barred')->default(false);
+            $table->boolean('initiator')->default(false);
             $table->uuid('incident_report_id')->nullable();
             $table->foreign('incident_report_id')->references('id')->on('incident_reports');
-
             $table->timestamps();
         });
     }

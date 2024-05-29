@@ -65,7 +65,7 @@
                         <div class="col-12 col-md-4 mb-1">
                             <div class="form-group">
                                 <label class="form-label">Event Date<i style="color:red;">*</i></label>
-                                <input type="datetime-local" class="form-control" name="event_date" value="{{ $data->event_date }}">
+                                <input type="date" class="form-control" name="event_date" value="{{ $data->event_date }}">
 
                                 @if($errors->has('event_date'))
                                 <div class="text-danger">{{ $errors->first('event_date') }}</div>
@@ -75,25 +75,11 @@
 
                         <div class="col-12 col-md-3 mb-1">
                             <div class="form-group">
-                                <label class="form-label">Area<i style="color:red;">*</i></label>
-                                <select class="form-control select2" name="area_id" value="{{ old('area_id') }}">
-                                    <option value="">Select Area</option>
-                                    @foreach ($area as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->area_id ? 'selected':''}}>{{$a->description}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('area_id'))
-                                <div class="text-danger">{{ $errors->first('area_id') }}</div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-1">
-                            <div class="form-group">
-                                <label class="form-label">Location<i style="color:red;">*</i></label>
+                                <label class="form-label">Area / Location / Sublocation<i style="color:red;">*</i></label>
                                 <select class="form-control select2" name="location_id" value="{{ old('location_id') }}">
                                     <option value="">Select Location</option>
                                     @foreach ($location as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->location_id ? 'selected':''}}>{{$a->description}}</option>
+                                    <option value="{{$a->id}}" {{$a->id == $data->location_id? 'selected':''}}>{{$a->description}} ({{$a->area->code}})</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('location_id'))
@@ -101,32 +87,12 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 mb-1">
-                            <div class="form-group">
-                                <label class="form-label">Description</label>
-                                <input type="text" class="form-control" name="description" value="{{$data->description}}">
 
-                                @if($errors->has('description'))
-                                <div class="text-danger">{{ $errors->first('description') }}</div>
-                                @endif
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-md-3 mb-1">
-                            <div class="form-group">
-                                <label class="form-label">Department<i style="color:red;">*</i></label>
-                                <select class="form-control select2" name="department_id" value="{{ old('department_id') }}">
-                                    <option value="">Select Department</option>
-                                    @foreach ($department as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->department_id ? 'selected':''}}>{{$a->description}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('department_id'))
-                                <div class="text-danger">{{ $errors->first('department_id') }}</div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-1">
+
+
+
+                        <div class="col-12 col-md-2 mb-1">
                             <div class="form-group">
                                 <label class="form-label">Report Type<i style="color:red;">*</i></label>
                                 <select class="form-control select2" name="report_type_id" value="{{ old('report_type_id') }}">
@@ -140,13 +106,13 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 mb-1">
+                        <div class="col-12 col-md-4 mb-1">
                             <div class="form-group">
-                                <label class="form-label">Incident Title<i style="color:red;">*</i></label>
+                                <label class="form-label">Department \ Incident Title<i style="color:red;">*</i></label>
                                 <select class="form-control select2" name="incident_title_id" value="{{ old('incident_title_id') }}">
                                     <option value="">Select Incident Title</option>
                                     @foreach ($incidentTitle as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->incident_title_id ? 'selected':''}}>{{$a->description}}</option>
+                                    <option value="{{$a->id}}" {{$a->id == $data->incident_title_id? 'selected':''}}>{{$a->description}} ({{$a->department->code}})</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('incident_title_id'))
@@ -197,16 +163,6 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <div class="form-group">
-                                <label class="form-label">Total Value</label>
-                                <input type="number" class="form-control " name="total_value" value="{{ $data->total_value }}">
-
-                                @if($errors->has('total_value'))
-                                <div class="text-danger">{{ $errors->first('total_value') }}</div>
-                                @endif
-                            </div>
-                        </div>
                     </div>
                     <div class="col-12 col-md-12">
                         <div class="form-group">
@@ -230,19 +186,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">Inspector<i style="color:red;">*</i></label>
-                                <select class="form-control select2" name="inspector_id" value="{{ old('inspector_id') }}">
-                                    <option value="">Select Inspector</option>
-                                    @foreach ($inspector as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->inspector_id ? 'selected':''}}>{{$a->description}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('inspector_id'))
-                                <div class=" text-danger">{{ $errors->first('inspector_id') }}
-                                </div>
-                                @endif
-                            </div>
+
                             <div class="form-group">
                                 <label class="form-label">Verified By</label>
                                 <input type="text" class="form-control" name="verified_by" value="{{ $data->verified_by  }}">
@@ -253,20 +197,120 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Blacklist</label>
-                            <select class="form-control select2" multiple="multiple" size="5" data-placeholder="Select on Blacklist" name="blacklist[]">
-                                @foreach ($blacklist as $a)
-                                <option value="{{$a->id}}" {{ $incidentBlacklist->contains($a->id) ? 'selected':''}}>{{$a->last_name}}, {{$a->first_name}} {{$a->middle_name}}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('details'))
-                            <div class=" text-danger">{{ $errors->first('details') }}
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
                             </div>
-                            @endif
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <div class="form-group">
+                                <label class="form-label">Member ID</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Nationality</label>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <div class="form-group">
+                                <label class="form-label">Barred</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <div class="form-group">
+                                <label class="form-label">Initiatior</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <div class="form-group">
+                                <label class="form-label">Action</label>
+                            </div>
                         </div>
                     </div>
+
+
+                    <div id="formContainer">
+                        @foreach ($incidentBlacklist as $a)
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-2">
+                                <div class="form-group">
+                                    <select class="form-control" data-placeholder="Select on Blacklist" name="blacklist[type][]">
+                                        <option value="Member" {{$a->type == 'Member' ? 'selected':''}}>Member</option>
+                                        <option value="Non - Member" {{$a->type == 'Non - Member' ? 'selected':''}}>Non - Member</option>
+                                        <option value="Employee" {{$a->type == 'Employee' ? 'selected':''}}>Employee</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="{{$a->member_id}}" name="blacklist[member_id][]">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="{{$a->first_name}}" name="blacklist[first_name][]">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="{{$a->last_name}}" name="blacklist[last_name][]">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="form-group">
+                                    <select class="form-control select2" data-placeholder="Select on Nationality" name="blacklist[nationality][]">
+                                        @foreach ($nationality as $b)
+                                        <option value="{{$b}}" {{$a->nationality == $b ? 'selected':''}}>{{$b}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="form-group">
+                                    <select class="form-control" data-placeholder="Select on Nationality" name="blacklist[barred][]">
+                                        <option value="NO" {{$a->barred == 1 ? 'selected':''}}>NO</option>
+                                        <option value="YES" {{$a->barred == 1 ? 'selected':''}}>YES</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="form-group">
+                                    <select class="form-control" data-placeholder="Select on Nationality" name="blacklist[initiator][]">
+                                        <option value="NO" {{$a->initiator == 1 ? 'selected':''}}>NO</option>
+                                        <option value="YES" {{$a->initiator == 1 ? 'selected':''}}>YES</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="removeField(this)">Remove</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        @endforeach
+
+
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addField()">Add Field</button>
+
 
                 </div>
                 <div class="box-footer text-end">
@@ -287,4 +331,50 @@
 @section('script')
 <script src="{{ asset('./assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
 <script src="{{ asset('./js/pages/advanced-form-element.js') }}"></script>
+<script>
+    function addField() {
+        var formContainer = document.getElementById("formContainer");
+        var lastFieldContainer = formContainer.lastElementChild;
+        var clonedFieldContainer = lastFieldContainer.cloneNode(true);
+
+        var removeBtn = clonedFieldContainer.querySelector(".btn");
+        removeBtn.addEventListener("click", function() {
+            removeField(this);
+        });
+
+        formContainer.appendChild(clonedFieldContainer);
+    }
+
+    // function addField() {
+    //     var formContainer = document.getElementById("formContainer");
+    //     var lastFieldContainer = formContainer.lastElementChild;
+    //     var clonedFieldContainer = lastFieldContainer.cloneNode(true);
+
+    //     // Log the cloned field container to inspect its structure
+    //     console.log(clonedFieldContainer);
+
+    //     setTimeout(function() {
+    //         var removeBtn = clonedFieldContainer.querySelector(".btn");
+    //         if (removeBtn) {
+    //             removeBtn.addEventListener("click", function() {
+    //                 removeField(this);
+    //             });
+    //         } else {
+    //             console.error("Button not found in cloned field container");
+    //         }
+    //     }, 100); // Adjust the delay as needed
+
+    //     formContainer.appendChild(clonedFieldContainer);
+    // }
+
+    function removeField(button) {
+        var formContainer = document.getElementById("formContainer");
+        var fieldContainer = button.closest('.row');
+        if (formContainer.childElementCount > 1) {
+            formContainer.removeChild(fieldContainer);
+        } else {
+            alert("You cannot remove all fields!");
+        }
+    }
+</script>
 @endsection
