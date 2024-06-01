@@ -14,15 +14,13 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'User']);
-        Role::create(['name' => 'Supervisor']);
-        Role::create(['name' => 'Admin']);
 
         $users = [
 
             'Show Create and Update User',
             'Show All Department Report',
             'Close For Reply',
+            'for OP Surv',
 
             'View Dashboard',
 

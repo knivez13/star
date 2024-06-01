@@ -114,14 +114,15 @@
                         <tr>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('synopsis','synopsis')</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('link_report','Report Link')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('property.description','Property')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('groupSection.description','Group Section')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('reportStatus.description ','Status')</th>
+                            <th style="margin: 0; white-space: nowrap;">Incident Title</th>
+                            <th style="margin: 0; white-space: nowrap;">Property</th>
+                            <th style="margin: 0; white-space: nowrap;">Group Section</th>
+                            <th style="margin: 0; white-space: nowrap;">Status</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('event_date','Event Date')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('area.description','Area')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('location.description','Location')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('department.description','Department')</th>
-                            <th style="margin: 0; white-space: nowrap;">@sortablelink('origination.description','Origination')</th>
+                            <th style="margin: 0; white-space: nowrap;">Area</th>
+                            <th style="margin: 0; white-space: nowrap;">Location</th>
+                            <th style="margin: 0; white-space: nowrap;">Department</th>
+                            <th style="margin: 0; white-space: nowrap;">Origination</th>
                             <th style="margin: 0; white-space: nowrap;">@sortablelink('created_at','Date Created')</th>
                             @can('Show Create and Update User')
                             <th style="margin: 0; white-space: nowrap;">Created by</th>
@@ -137,6 +138,7 @@
                                 <a href="{{ route('tracker.show', $a->linkReport['id']) }}">{{ $a->link_report ? $a->linkReport['synopsis'] : null }}</a>
                                 @endif
                             </td>
+                            <td style="margin: 0; white-space: nowrap;">{{ $a->incidentTitle->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->property->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->groupSection->description }}</td>
                             <td style="margin: 0; white-space: nowrap;">{{ $a->reportStatus->description }}</td>

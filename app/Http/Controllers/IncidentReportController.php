@@ -50,7 +50,7 @@ class IncidentReportController extends Controller
         $list = IncidentReport::query();
 
 
-        if ($user->can('Show All Department Report') && $user->can('Close For Reply')) {
+        if ($user->can('Show All Department Report') || $user->can('for OP Surv')) {
         } else {
             $list->where('department_id', '=', $user->department_id);
             if ($user->can('Close For Reply')) {
@@ -111,7 +111,7 @@ class IncidentReportController extends Controller
         $currency = Currency::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
         $department = Department::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
         $groupsection = GroupSection::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
-        $incidentTitle = IncidentTitle::select('id', 'code', 'description', 'department_id')->sortable(['description' => 'asc'])->with('department')->get();
+        $incidentTitle = IncidentTitle::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
         $inspector = Inspector::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
         $location = Location::select('id', 'code', 'description', 'area_id')->sortable(['description' => 'asc'])->with('area')->get();
         $origination = Origination::select('id', 'code', 'description')->sortable(['description' => 'asc'])->get();
@@ -365,7 +365,7 @@ class IncidentReportController extends Controller
         $link = IncidentReport::where('id', '=', $id)->first();
         $blacklist = Blacklist::get();
 
-        return view('dashboard.tracker.link', compact('blacklist', 'nationality', 'link', 'currency',  'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
+        return view('dashboard.tracker.link', compact('blacklist', 'nationality', 'link', 'currency', 'department',  'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function store(Request $request)
@@ -378,6 +378,7 @@ class IncidentReportController extends Controller
                     'location_id' => 'required',
                     'event_date' => 'required',
                     'report_type_id' => 'required',
+                    'department_id' => 'required',
                     'incident_title_id' => 'required',
                     'origin_id' => 'required',
                     'result_id' => 'required',
@@ -389,11 +390,9 @@ class IncidentReportController extends Controller
                 $property = Property::where('id', '=', $request->property_id)->first()->code;
                 $groupsection = GroupSection::where('id', '=', $request->group_section_id)->first()->code;
                 $area_id = Location::where('id', '=', $request->location_id)->first()->area_id;
-                $department_id = IncidentTitle::where('id', '=', $request->incident_title_id)->first()->department_id;
 
-                $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'location_id', 'description', 'event_date', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
+                $input = Arr::only($request->all(), ['property_id', 'group_section_id', 'link_report', 'location_id', 'description', 'department_id', 'event_date', 'report_type_id', 'incident_title_id', 'origin_id', 'result_id', 'currency_id', 'total_value', 'details', 'action_taken', 'inspector_id', 'verified_by']);
                 $input['synopsis'] = $year . '/' . $property . '/' . $groupsection . '/' . sprintf("%05d", $total + 1);
-                $input['department_id'] = $department_id;
                 $input['area_id'] = $area_id;
                 $input['created_by'] = Auth::user()->id;
                 $input['report_status_id'] = ReportStatus::where('description', '=', 'Pending')->first()->id;
@@ -554,7 +553,7 @@ class IncidentReportController extends Controller
         $incidentBlacklist = IncidentBlacklist::where('incident_report_id', '=', $id)->get();
 
         $data = IncidentReport::find($id);
-        return view('dashboard.tracker.edit', compact('incidentBlacklist', 'data', 'nationality',  'currency',  'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
+        return view('dashboard.tracker.edit', compact('incidentBlacklist', 'data', 'nationality', 'department',  'currency',  'groupsection', 'incidentTitle', 'inspector', 'location', 'origination', 'property', 'reporttype', 'result'));
     }
 
     public function update(Request $request, $id)
@@ -615,6 +614,7 @@ class IncidentReportController extends Controller
     public function returnHead($id)
     {
         IncidentReport::find($id)->update([
+            'report_status_id' => ReportStatus::where('description', '=', 'Reply Done')->first()->id,
             'for_head_reply' => 0
         ]);
         return redirect(route('tracker.index'))->with('success', 'Delete successfully');

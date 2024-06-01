@@ -67,7 +67,7 @@
                             <img src="{{ asset('./logo2.png') }}" class="avatar avatar-lg bg-primary-light rounded100" alt="User Image">
                         </div>
                         <div class="info">
-                            <a class="px-20" href="#">{{ Auth::user()->emp_id }}</a>
+                            <a class="px-20" href="#">{{ Auth::user()->first_name }}</a>
                         </div>
                     </div>
                     <ul class="list-inline profile-setting mt-20 mb-0 d-flex justify-content-between">

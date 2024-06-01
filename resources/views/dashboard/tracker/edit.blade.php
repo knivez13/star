@@ -73,13 +73,13 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-3 mb-1">
+                        <div class="col-12 col-md-2 mb-1">
                             <div class="form-group">
                                 <label class="form-label">Area / Location / Sublocation<i style="color:red;">*</i></label>
                                 <select class="form-control select2" name="location_id" value="{{ old('location_id') }}">
                                     <option value="">Select Location</option>
                                     @foreach ($location as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->location_id? 'selected':''}}>{{$a->description}} ({{$a->area->code}})</option>
+                                    <option value="{{$a->id}}" {{$a->id == $data->location_id ? 'selected':''}}>{{$a->description}} ({{$a->area->code}})</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('location_id'))
@@ -87,11 +87,6 @@
                                 @endif
                             </div>
                         </div>
-
-
-
-
-
                         <div class="col-12 col-md-2 mb-1">
                             <div class="form-group">
                                 <label class="form-label">Report Type<i style="color:red;">*</i></label>
@@ -106,13 +101,27 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 mb-1">
+                        <div class="col-12 col-md-2 mb-1">
                             <div class="form-group">
-                                <label class="form-label">Department \ Incident Title<i style="color:red;">*</i></label>
+                                <label class="form-label">Department<i style="color:red;">*</i></label>
+                                <select class="form-control select2" name="department_id" value="{{ old('department_id') }}">
+                                    <option value="">Select Department</option>
+                                    @foreach ($department as $a)
+                                    <option value="{{$a->id}}" {{$a->id == $data->department_id ? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('department_id'))
+                                <div class="text-danger">{{ $errors->first('department_id') }}</div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 mb-1">
+                            <div class="form-group">
+                                <label class="form-label">Incident Title<i style="color:red;">*</i></label>
                                 <select class="form-control select2" name="incident_title_id" value="{{ old('incident_title_id') }}">
                                     <option value="">Select Incident Title</option>
                                     @foreach ($incidentTitle as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->incident_title_id? 'selected':''}}>{{$a->description}} ({{$a->department->code}})</option>
+                                    <option value="{{$a->id}}" {{$a->id == $data->incident_title_id ? 'selected':''}}>{{$a->description}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('incident_title_id'))
@@ -122,18 +131,15 @@
                         </div>
                         <div class="col-12 col-md-3 mb-1">
                             <div class="form-group">
-                                <label class="form-label">Origination<i style="color:red;">*</i></label>
-                                <select class="form-control select2" name="origin_id" value="{{ old('origin_id') }}">
-                                    <option value="">Select Origination</option>
-                                    @foreach ($origination as $a)
-                                    <option value="{{$a->id}}" {{$a->id == $data->origin_id ? 'selected':''}}>{{$a->description}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('origin_id'))
-                                <div class="text-danger">{{ $errors->first('origin_id') }}</div>
+                                <label class="form-label">Description</label>
+                                <input type="text" class="form-control " name="description" value="{{ $data->description }}">
+                                @if($errors->has('description'))
+                                <div class=" text-danger">{{ $errors->first('description') }}
+                                </div>
                                 @endif
                             </div>
                         </div>
+
 
                         <div class="col-12 col-md-4 mb-1">
                             <div class="form-group">
@@ -163,7 +169,22 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="col-12 col-md-4 mb-1">
+                            <div class="form-group">
+                                <label class="form-label">Origination<i style="color:red;">*</i></label>
+                                <select class="form-control select2" name="origin_id" value="{{ old('origin_id') }}">
+                                    <option value="">Select Origination</option>
+                                    @foreach ($origination as $a)
+                                    <option value="{{$a->id}}" {{$a->id == $data->origin_id ? 'selected':''}}>{{$a->description}}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('origin_id'))
+                                <div class="text-danger">{{ $errors->first('origin_id') }}</div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
+
                     <div class="col-12 col-md-12">
                         <div class="form-group">
                             <label class="form-label">Details<i style="color:red;">*</i></label>

@@ -1160,6 +1160,7 @@ class UserSeeder extends Seeder
         $reportstatus = [
             'Pending',
             'Close for Reply',
+            'Reply Done',
             'Total Close',
             'Void'
         ];
@@ -1652,9 +1653,10 @@ class UserSeeder extends Seeder
 
         ];
         foreach ($incidenttitle as $q) {
-            $department_id = Department::where(['code' => $q['code'], 'description' =>  $q['code']])->first()->id;
-
-            IncidentTitle::create(['code' => $q['incident'], 'department_id' => $department_id, 'description' => $q['incident']]);
+            $count = IncidentTitle::where('code', '=', $q['incident'])->where('description', '=', $q['incident'])->count();
+            if ($count == 0) {
+                IncidentTitle::create(['code' => $q['incident'], 'description' => $q['incident']]);
+            }
         }
 
 
