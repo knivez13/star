@@ -63,6 +63,8 @@ return new class extends Migration
 
             $table->tinyInteger('for_head_reply')->default(0);
 
+            $table->longText('head_comment')->nullable();
+
             $table->string('verified_by')->nullable();
             $table->timestamps();
             $table->uuid('created_by')->nullable();

@@ -53,12 +53,14 @@ class IncidentReportController extends Controller
         if ($user->can('Show All Department Report') || $user->can('for OP Surv')) {
         } else {
             $list->where('department_id', '=', $user->department_id);
-            if ($user->can('Close For Reply')) {
-                // $list->where('report_status_id', '=', ReportStatus::where('description', '=', 'Close For Reply')->first()->id);
-                $list->where('for_head_reply', '=', 1);
-            } else {
-                // $list->where('report_status_id', '=', ReportStatus::where('description', '=', 'Pending')->first()->id);
-                $list->where('for_head_reply', '=', 0);
+            if (!$user->can('Show All Status')) {
+                if ($user->can('Close For Reply')) {
+                    // $list->where('report_status_id', '=', ReportStatus::where('description', '=', 'Close For Reply')->first()->id);
+                    $list->where('for_head_reply', '=', 1);
+                } else {
+                    // $list->where('report_status_id', '=', ReportStatus::where('description', '=', 'Pending')->first()->id);
+                    $list->where('for_head_reply', '=', 0);
+                }
             }
         }
 
@@ -605,7 +607,7 @@ class IncidentReportController extends Controller
     public function closereply($id)
     {
         IncidentReport::find($id)->update([
-            'report_status_id' => ReportStatus::where('description', '=', 'Close For Reply')->first()->id,
+            'report_status_id' => ReportStatus::where('description', '=', 'Close for Reply')->first()->id,
             'for_head_reply' => 1
         ]);
         return redirect(route('tracker.index'))->with('success', 'Delete successfully');

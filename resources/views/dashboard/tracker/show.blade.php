@@ -55,16 +55,20 @@
                     @endforeach
                     @endif
                 </div>
+                {{$data->reportStatus->description}}
+                @if ($data->reportStatus->description === 'Close for Reply' || $data->reportStatus->description === 'Reply Done'|| $data->reportStatus->description === 'Total Close')
                 <div class="col-12 col-md-12">
                     <div class="form-group">
-                        <label class="form-label">Details<i style="color:red;">*</i></label>
-                        <textarea class="form-control" rows="3" name="details"> {{ old('details') }}</textarea>
-                        @if($errors->has('details'))
-                        <div class=" text-danger">{{ $errors->first('details') }}
+                        <label class="form-label">Comment<i style="color:red;">*</i></label>
+                        <textarea class="form-control" rows="3" name="head_comment"> {{ old('head_comment') }}</textarea>
+                        @if($errors->has('head_comment'))
+                        <div class=" text-danger">{{ $errors->first('head_comment') }}
                         </div>
                         @endif
                     </div>
                 </div>
+                @endif
+
 
             </div>
 

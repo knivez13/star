@@ -19,6 +19,8 @@ class PermissionSeeder extends Seeder
 
             'Show Create and Update User',
             'Show All Department Report',
+            'Show All Status',
+
             'Close For Reply',
             'for OP Surv',
 
